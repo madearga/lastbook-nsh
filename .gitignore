@@ -1,0 +1,4 @@
+.nsh/
+node_modules/
+target/
+dist/
