@@ -73,3 +73,48 @@ Semua 6 PDF di atas diunduh hanya untuk audit lisensi ke /tmp (di luar repo) —
 - 70 PNG halaman: 18,1 MB di `assets/med-*/p-NN.png`
 - 31 PDF sumber di `assets/pdf/med-*.pdf`: 152 MB (arsip verifikasi; tidak dirujuk App.tsx/readers)
 - Yang tidak dicek: tidak ada render ulang cek visual per halaman (OCR/teks saja); halaman >250KB tetap 800px sesuai instruksi dan tidak dipaksa lebih kecil
+
+---
+
+## Alternatif IFRC (tindak lanjut 2025-11-18)
+
+Dicek: apakah edisi IFRC lama berlisensi lebih terbuka.
+
+| edisi | file | lisensi tertulis |
+|---|---|---|
+| 2025 (dirujuk data, 594 hal) | Guidelines_2025.pdf | "© IFRC 2025 … reproduction should be directed to the IFRC" → izin diperlukan |
+| 2020 EN (488 hal) | ifrc2020_en.pdf (globalfirstaidcentre.org, 6,7 MB) | "© IFRC, Geneva, 2020. **Copies of all or part of this study may be made for non-commercial use, providing the source is acknowledged.** Requests for commercial reproduction should be directed to the IFRC." |
+
+Hasil: 2020 bukan CC, tetapi memberi izin salin **non-komersial + atribusi** (setara CC BY-NC tanpa ShareAlike). 2025 justru lebih ketat.
+
+Namun nomor halaman tidak bisa dipindahkan begitu saja: 2020 = 488 hal, 2025 = 594 hal; topik yang sama jatuh di halaman berbeda.
+
+| topik (halaman 2025) | halaman padanan di 2020 |
+|---|---|
+| recovery position (152) | 128–133 |
+| CPR / chest compression (159) | 89–96 |
+| burn, air mengalir (288–289) | 213–215 |
+| anaphylaxis / epinephrine (376–377) | 279–287 |
+| carbon monoxide (353) | 258–263 |
+| heat stroke (446) | 332–336 |
+| hypothermia (461) | 343–353 |
+| traumatic event (486) | 366–385 |
+| shock (388) | 288–289, 304–305 |
+| spinal (307) | 128–133 |
+| head injury (312) | 228–239 |
+| poison (347–348) | 258–261 |
+
+Konsekuensi: memakai edisi 2020 mengharuskan nomor `page` di `topics.ts` diubah per rujukan (file itu di luar wewenang saya), dan `credit` di `assets/books.yml` harus menyebut edisi 2020 — kalau tidak, app akan mengutip halaman yang salah.
+
+## Blocker integrasi yang ditemukan (penting, berlaku untuk semua batch)
+
+`App.tsx` memakai nomor halaman sumber sebagai **indeks array**, bukan label:
+
+- baris 56–57: `canRead` → `item.page <= b.pages.length` (jumlah halaman yang dirender)
+- baris 678: `book().pages[page() - 1]`
+
+Karena konvensi batch hanya merender halaman yang dirujuk (bolong), tombol "buka halaman" hilang untuk setiap rujukan yang nomor halamannya lebih besar dari jumlah gambar. Terukur di batch C: **52 dari 78 rujukan berhalaman tidak bisa dibuka** (mis. `med-443ae5cfaa6ecc68`: 20 halaman dirender untuk rujukan sampai halaman 60 → 11 rujukan tidak terjangkau).
+
+Dua jalan keluar, keduanya di file yang tidak boleh saya sentuh:
+1. Simpan label halaman di `readers.batch.ts` (mis. `{ n: 60, src, w, h }`) dan cari berdasarkan label, bukan `pages[page-1]`; `canRead` ikut cek label.
+2. Render rapat semua halaman sampai nomor rujukan terbesar — untuk batch C saja ±900 halaman/250 MB, dan untuk `med-2e83e22162a9a006` berarti 486 halaman.

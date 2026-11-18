@@ -169,6 +169,69 @@ import bp165 from "./assets/med-9691a9d4a1231acf/p-01.png";
 import bp166 from "./assets/med-d57916742d1eec74/p-02.png";
 import bp167 from "./assets/med-d57916742d1eec74/p-04.png";
 import bp168 from "./assets/med-68adb7585ea5d7e0/p-25.png";
+import bp169 from "./assets/mfg2-7e54a5d6ccd6e584/p-11.png";
+import bp170 from "./assets/mfg2-7e54a5d6ccd6e584/p-49.png";
+import bp171 from "./assets/eng-7101623c5f0a1152/p-70.png";
+import bp172 from "./assets/eng-cc45c31a68f597a7/p-350.png";
+import bp173 from "./assets/eng-cc45c31a68f597a7/p-354.png";
+import bp174 from "./assets/eng-cea09c7220cd4bd0/p-13.png";
+import bp175 from "./assets/eng-cea09c7220cd4bd0/p-16.png";
+import bp176 from "./assets/eng-cea09c7220cd4bd0/p-17.png";
+import bp177 from "./assets/eng-cea09c7220cd4bd0/p-189.png";
+import bp178 from "./assets/clinical-fe3d008bfe1dd1a2/p-4.png";
+import bp179 from "./assets/clinical-fe3d008bfe1dd1a2/p-5.png";
+import bp180 from "./assets/clinical-fe3d008bfe1dd1a2/p-6.png";
+import bp181 from "./assets/clinical-ec4fa543bb6ce0c8/p-1.png";
+import bp182 from "./assets/clinical-ec4fa543bb6ce0c8/p-2.png";
+import bp183 from "./assets/clinical-660fbc63f3545bd0/p-1.png";
+import bp184 from "./assets/clinical-660fbc63f3545bd0/p-4.png";
+import bp185 from "./assets/clinical-14def41d1ef369f1/p-26.png";
+import bp186 from "./assets/clinical-e11235e28035e4ac/p-1.png";
+import bp187 from "./assets/clinical-5312980049ba6680/p-1.png";
+import bp188 from "./assets/clinical-96bc1472fc13d771/p-1.png";
+import bp189 from "./assets/clinical-8743f84f6741a54e/p-9.png";
+import bp190 from "./assets/clinical-8743f84f6741a54e/p-13.png";
+import bp191 from "./assets/clinical-8743f84f6741a54e/p-24.png";
+import bp192 from "./assets/clinical-e43618811c630265/p-9.png";
+import bp193 from "./assets/clinical-8dc56ea4c7868623/p-2.png";
+import bp194 from "./assets/clinical-8dc56ea4c7868623/p-7.png";
+import bp195 from "./assets/coastal-growing-0e2825ce7a278c7c5e86/p-3.png";
+import bp196 from "./assets/coastal-growing-0e2825ce7a278c7c5e86/p-7.png";
+import bp197 from "./assets/coastal-growing-0e2825ce7a278c7c5e86/p-9.png";
+import bp198 from "./assets/coastal-growing-84be1f504ea1d4902487/p-1.png";
+import bp199 from "./assets/coastal-growing-84be1f504ea1d4902487/p-2.png";
+import bp200 from "./assets/coastal-growing-61ed997967489e5abeb1/p-2.png";
+import bp201 from "./assets/coastal-growing-740c0243d587fcafebe3/p-1.png";
+import bp202 from "./assets/eng-5a131eb5010e45d7/p-374.png";
+import bp203 from "./assets/eng-582d9d6be8c29785/p-14.png";
+import bp204 from "./assets/eng-f547be2abcd61da0/p-1.png";
+import bp205 from "./assets/eng-9415fc58b55ed367/p-1.png";
+import bp206 from "./assets/eng-1119bce64d71b642/p-1.png";
+import bp207 from "./assets/eng-866c68545e73a8ef/p-30.png";
+import bp208 from "./assets/31a7235cab119ccb/p-08.png";
+import bp209 from "./assets/31a7235cab119ccb/p-17.png";
+import bp210 from "./assets/31a7235cab119ccb/p-26.png";
+import bp211 from "./assets/31a7235cab119ccb/p-27.png";
+import bp212 from "./assets/2848f4bffb8109/p-05.png";
+import bp213 from "./assets/2848f4bffb8109/p-07.png";
+import bp214 from "./assets/2848f4bffb8109/p-08.png";
+import bp215 from "./assets/2848f4bffb8109/p-09.png";
+import bp216 from "./assets/2c619f4fe19187/p-01.png";
+import bp217 from "./assets/2c619f4fe19187/p-02.png";
+import bp218 from "./assets/bf9e99715ecdde/p-01.png";
+import bp219 from "./assets/8bb952fd2f238b/p-109.png";
+import bp220 from "./assets/8bb952fd2f238b/p-200.png";
+import bp221 from "./assets/a8defaa10a263bba/p-05.png";
+import bp222 from "./assets/4bd70335aa10ef/p-03.png";
+import bp223 from "./assets/e74ed9511d24c6/p-01.png";
+import bp224 from "./assets/68b98222512b05/p-01.png";
+import bp225 from "./assets/53da8d3443e35e/p-01.png";
+import bp226 from "./assets/a7a60dbbb26052/p-02.png";
+import bp227 from "./assets/dee61b224a1299/p-02.png";
+import bp228 from "./assets/2aadecc420798e/p-01.png";
+import bp229 from "./assets/11c57afd0384b8/p-01.png";
+import bp230 from "./assets/d2213d245d582c/p-01.png";
+import bp231 from "./assets/e02dc81261aae7/p-358.png";
 
 export type BatchBook = {
   id: string;
@@ -625,6 +688,349 @@ export const BATCH_BOOKS: BatchBook[] = [
     credit: { en: "WHO-ICRC Basic Emergency Care: approach to the acutely ill and injured (2018) · CC BY-NC-SA 3.0 IGO", id: "WHO-ICRC Basic Emergency Care (2018) · CC BY-NC-SA 3.0 IGO" },
     pages: [
     { src: bp168, n: 25, w: 900, h: 1754 },
+    ],
+  },
+  {
+    id: "mfg2-7e54a5d6ccd6e584",
+    title: "Handtools for Trail Work (USFS)",
+    credit: { en: "USDA Forest Service — Handtools for Trail Work (2005) · public domain", id: "USDA Forest Service — Handtools for Trail Work (2005) · domain publik" },
+    pages: [
+    { src: bp169, n: 11, w: 900, h: 1650 },
+    { src: bp170, n: 49, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "eng-7101623c5f0a1152",
+    title: "Steelworker Vol 1 (US Navy)",
+    credit: { en: "US Navy NAVEDTRA 14250 Steelworker, Volume 1 (1996) · public domain", id: "US Navy NAVEDTRA 14250 Steelworker Volume 1 (1996) · domain publik" },
+    pages: [
+    { src: bp171, n: 70, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "eng-cc45c31a68f597a7",
+    title: "Utilitiesman Basic (2014)",
+    credit: { en: "US Navy NAVEDTRA 14265A Utilitiesman Basic (2014) · public domain", id: "US Navy NAVEDTRA 14265A Utilitiesman Basic (2014) · domain publik" },
+    pages: [
+    { src: bp172, n: 350, w: 800, h: 1650 },
+    { src: bp173, n: 354, w: 900, h: 1650 },
+    ],
+  },
+  {
+    id: "eng-cea09c7220cd4bd0",
+    title: "Hand Tools Manual (TM 9-243)",
+    credit: { en: "US Army/Navy TM 9-243 Use and Care of Hand Tools and Measuring Tools (2004) · public domain", id: "US Army/Navy TM 9-243 — Perawatan Alat Tangan (2004) · domain publik" },
+    pages: [
+    { src: bp174, n: 13, w: 900, h: 1650 },
+    { src: bp175, n: 16, w: 800, h: 1650 },
+    { src: bp176, n: 17, w: 800, h: 1650 },
+    { src: bp177, n: 189, w: 900, h: 1650 },
+    ],
+  },
+  {
+    id: "clinical-fe3d008bfe1dd1a2",
+    title: "Signs of Dangerous Illness (WTND 2025 ch4)",
+    credit: { en: "Hesperian Health Guides — Where There Is No Doctor 2025, chapter 4 · Hesperian Open Copyright Policy (non-commercial use with credit)", id: "Hesperian — Where There Is No Doctor 2025 bab 4 · Open Copyright Policy (penggunaan non-komersial dengan kredit)" },
+    pages: [
+    { src: bp178, n: 4, w: 900, h: 1463 },
+    { src: bp179, n: 5, w: 900, h: 1463 },
+    { src: bp180, n: 6, w: 900, h: 1463 },
+    ],
+  },
+  {
+    id: "clinical-ec4fa543bb6ce0c8",
+    title: "Medicines Can Kill (WTND 2025 ch6)",
+    credit: { en: "Hesperian Health Guides — Where There Is No Doctor 2025, chapter 6 · Hesperian Open Copyright Policy (non-commercial use with credit)", id: "Hesperian — Where There Is No Doctor 2025 bab 6 · Open Copyright Policy" },
+    pages: [
+    { src: bp181, n: 1, w: 900, h: 1463 },
+    { src: bp182, n: 2, w: 800, h: 1463 },
+    ],
+  },
+  {
+    id: "clinical-660fbc63f3545bd0",
+    title: "The Medicine Kit (WTND 2025 ch23)",
+    credit: { en: "Hesperian Health Guides — Where There Is No Doctor 2025, chapter 23 · Hesperian Open Copyright Policy (non-commercial use with credit)", id: "Hesperian — Where There Is No Doctor 2025 bab 23 · Open Copyright Policy" },
+    pages: [
+    { src: bp183, n: 1, w: 800, h: 1463 },
+    { src: bp184, n: 4, w: 900, h: 1463 },
+    ],
+  },
+  {
+    id: "clinical-14def41d1ef369f1",
+    title: "First Aid (WTND 2025 ch10)",
+    credit: { en: "Hesperian Health Guides — Where There Is No Doctor 2025, chapter 10 · Hesperian Open Copyright Policy (non-commercial use with credit)", id: "Hesperian — Where There Is No Doctor 2025 bab 10 · Open Copyright Policy" },
+    pages: [
+    { src: bp185, n: 26, w: 900, h: 1463 },
+    ],
+  },
+  {
+    id: "clinical-e11235e28035e4ac",
+    title: "How to Examine a Sick Person (WTND 2025 ch3)",
+    credit: { en: "Hesperian Health Guides — Where There Is No Doctor 2025, chapter 3 · Hesperian Open Copyright Policy (non-commercial use with credit)", id: "Hesperian — Where There Is No Doctor 2025 bab 3 · Open Copyright Policy" },
+    pages: [
+    { src: bp186, n: 1, w: 900, h: 1463 },
+    ],
+  },
+  {
+    id: "clinical-5312980049ba6680",
+    title: "Health Problems of Older People (WTND 2025 ch22)",
+    credit: { en: "Hesperian Health Guides — Where There Is No Doctor 2025, chapter 22 · Hesperian Open Copyright Policy (non-commercial use with credit)", id: "Hesperian — Where There Is No Doctor 2025 bab 22 · Open Copyright Policy" },
+    pages: [
+    { src: bp187, n: 1, w: 900, h: 1463 },
+    ],
+  },
+  {
+    id: "clinical-96bc1472fc13d771",
+    title: "Antibiotics (WTND 2025 Green Pages)",
+    credit: { en: "Hesperian Health Guides — Where There Is No Doctor 2025, Green Pages · Hesperian Open Copyright Policy (non-commercial use with credit)", id: "Hesperian — Where There Is No Doctor 2025 Green Pages · Open Copyright Policy" },
+    pages: [
+    { src: bp188, n: 1, w: 800, h: 1463 },
+    ],
+  },
+  {
+    id: "clinical-8743f84f6741a54e",
+    title: "Tooth Abscess and Knocked-Out Tooth (WTND Dentist ch7)",
+    credit: { en: "Hesperian Health Guides — Where There Is No Dentist, updated edition 2025, chapter 7 · Hesperian Open Copyright Policy (non-commercial use with credit)", id: "Hesperian — Where There Is No Dentist edisi 2025 bab 7 · Open Copyright Policy" },
+    pages: [
+    { src: bp189, n: 9, w: 900, h: 1332 },
+    { src: bp190, n: 13, w: 900, h: 1332 },
+    { src: bp191, n: 24, w: 900, h: 1332 },
+    ],
+  },
+  {
+    id: "clinical-e43618811c630265",
+    title: "Clean Your Teeth (WTND Dentist ch5)",
+    credit: { en: "Hesperian Health Guides — Where There Is No Dentist, updated edition 2025, chapter 5 · Hesperian Open Copyright Policy (non-commercial use with credit)", id: "Hesperian — Where There Is No Dentist edisi 2025 bab 5 · Open Copyright Policy" },
+    pages: [
+    { src: bp192, n: 9, w: 900, h: 1332 },
+    ],
+  },
+  {
+    id: "clinical-8dc56ea4c7868623",
+    title: "Emergencies in Labor (A Book for Midwives 2026 ch10)",
+    credit: { en: "Hesperian Health Guides — A Book for Midwives 2026, chapter 10 · Hesperian Open Copyright Policy (non-commercial use with credit)", id: "Hesperian — A Book for Midwives 2026 bab 10 · Open Copyright Policy" },
+    pages: [
+    { src: bp193, n: 2, w: 800, h: 1550 },
+    { src: bp194, n: 7, w: 800, h: 1550 },
+    ],
+  },
+  {
+    id: "coastal-growing-0e2825ce7a278c7c5e86",
+    title: "Soils in Urban Agriculture (UCCE LA)",
+    credit: { en: "University of California Cooperative Extension LA — Soils in Urban Agriculture: Testing, Remediation and Best Management Practices · free educational publication", id: "UC Cooperative Extension LA — Tanah di Pertanian Kota: Uji, Perbaikan, Praktik Terbaik · publikasi edukasi gratis" },
+    pages: [
+    { src: bp195, n: 3, w: 800, h: 1650 },
+    { src: bp196, n: 7, w: 800, h: 1650 },
+    { src: bp197, n: 9, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "coastal-growing-84be1f504ea1d4902487",
+    title: "Growing Vegetables in Containers (UC)",
+    credit: { en: "UC Master Gardener Program — Growing Vegetables in Containers · free educational handout", id: "UC Master Gardener — Menanam Sayur dalam Wadah · handout edukasi gratis" },
+    pages: [
+    { src: bp198, n: 1, w: 800, h: 1650 },
+    { src: bp199, n: 2, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "coastal-growing-61ed997967489e5abeb1",
+    title: "Growing Sweet Potatoes (UC Sacramento)",
+    credit: { en: "UC Master Gardeners Sacramento County — Growing Sweet Potatoes in the Sacramento Area (EHN 102) · one illustration reprinted with permission © 2013 The Taunton Press", id: "UC Master Gardeners Sacramento — Budidaya Ubi Jalar di Area Sacramento (EHN 102) · 1 ilustrasi izin © 2013 The Taunton Press" },
+    pages: [
+    { src: bp200, n: 2, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "coastal-growing-740c0243d587fcafebe3",
+    title: "Seed Saving Chart (UC Placer)",
+    credit: { en: "UC Master Gardeners Placer County — Seed Saving, vegetable chart · free educational handout", id: "UC Master Gardeners Placer — Chart Penyimpanan Benih Sayur · handout edukasi gratis" },
+    pages: [
+    { src: bp201, n: 1, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "eng-5a131eb5010e45d7",
+    title: "Building Soils for Better Crops (SARE)",
+    credit: { en: "SARE (USDA) — Building Soils for Better Crops, 4th ed. (2021), ch. 23 · free download from sare.org", id: "SARE (USDA) — Building Soils for Better Crops ed. 4 (2021) bab 23 · unduh gratis sare.org" },
+    pages: [
+    { src: bp202, n: 374, w: 900, h: 1350 },
+    ],
+  },
+  {
+    id: "eng-582d9d6be8c29785",
+    title: "Scouting for Pests (SARE)",
+    credit: { en: "SARE (USDA) — A Whole-Farm Approach to Managing Pests · free download from sare.org", id: "SARE (USDA) — Pendekatan Whole-Farm untuk Pengelolaan Hama · unduh gratis sare.org" },
+    pages: [
+    { src: bp203, n: 14, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "eng-f547be2abcd61da0",
+    title: "Carpenter's Workbench Plan (1952)",
+    credit: { en: "LSU AgCenter building plan 3603 (USDA origin) · free public building plans", id: "LSU AgCenter plan 3603 — Meja Kerja Tukang Kayu (asal USDA 1952) · rencana bangunan publik gratis" },
+    pages: [
+    { src: bp204, n: 1, w: 900, h: 1275 },
+    ],
+  },
+  {
+    id: "eng-9415fc58b55ed367",
+    title: "Three-Bin Compost Plan",
+    credit: { en: "LSU AgCenter building plan 4816 · free public building plans", id: "LSU AgCenter plan 4816 — Kompos Tiga Bin · rencana bangunan publik gratis" },
+    pages: [
+    { src: bp205, n: 1, w: 900, h: 2550 },
+    ],
+  },
+  {
+    id: "eng-1119bce64d71b642",
+    title: "Cold Frame and Greenhouse Plan",
+    credit: { en: "LSU AgCenter building plan 5941 · free public building plans", id: "LSU AgCenter plan 5941 — Cold Frame dan Rumah Kaca · rencana bangunan publik gratis" },
+    pages: [
+    { src: bp206, n: 1, w: 900, h: 2550 },
+    ],
+  },
+  {
+    id: "eng-866c68545e73a8ef",
+    title: "F1 Hybrids vs Open-Pollinated (FAO)",
+    credit: { en: "FAO — Appropriate Seed Varieties for Small-scale Farmers · copied for non-commercial use with acknowledgement of FAO", id: "FAO — Varietas Benih yang Tepat untuk Petani Skala Kecil · disalin utk penggunaan non-komersial dengan kredit FAO" },
+    pages: [
+    { src: bp207, n: 30, w: 900, h: 875 },
+    ],
+  },
+  {
+    id: "31a7235cab119ccb",
+    title: "USDA Home Canning Guide 1: Principles",
+    credit: { en: "USDA Complete Guide to Home Canning, Guide 1, 2015 revision · US Government public domain", id: "USDA Complete Guide to Home Canning, Panduan 1, revisi 2015 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp208, n: 8, w: 900, h: 1650 },
+    { src: bp209, n: 17, w: 800, h: 1650 },
+    { src: bp210, n: 26, w: 800, h: 1650 },
+    { src: bp211, n: 27, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "2848f4bffb8109",
+    title: "How to Prepare for a Wildfire",
+    credit: { en: "FEMA / America's PrepareAthon!, 2014 · US Government public domain", id: "FEMA / America's PrepareAthon!, 2014 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp212, n: 5, w: 800, h: 1650 },
+    { src: bp213, n: 7, w: 900, h: 1650 },
+    { src: bp214, n: 8, w: 800, h: 1650 },
+    { src: bp215, n: 9, w: 900, h: 1650 },
+    ],
+  },
+  {
+    id: "2c619f4fe19187",
+    title: "Know Your Alerts and Warnings",
+    credit: { en: "FEMA P-1093, 2018 · US Government public domain", id: "FEMA P-1093, 2018 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp216, n: 1, w: 800, h: 1650 },
+    { src: bp217, n: 2, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "bf9e99715ecdde",
+    title: "Finding Your Way with Map and Compass",
+    credit: { en: "USGS Fact Sheet 035-01, 2001 · US Government public domain", id: "USGS Fact Sheet 035-01, 2001 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp218, n: 1, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "8bb952fd2f238b",
+    title: "US Army Survival Manual FM 21-76 (abridged)",
+    credit: { en: "US Army FM 21-76, 1992, abridged reprint · US Government public domain", id: "FM 21-76 Angkatan Darat AS, 1992, cetakan ringkas · domain publik pemerintah AS" },
+    pages: [
+    { src: bp219, n: 109, w: 800, h: 1650 },
+    { src: bp220, n: 200, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "a8defaa10a263bba",
+    title: "USDA Complete Guide to Home Canning (intro)",
+    credit: { en: "USDA Complete Guide to Home Canning, 2015 revision · US Government public domain", id: "USDA Complete Guide to Home Canning, revisi 2015 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp221, n: 5, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "4bd70335aa10ef",
+    title: "NOAA Weather Radio brochure",
+    credit: { en: "NOAA / NWS brochure NOAA/PA 94062, rev. 2021 · US Government public domain", id: "Brosur NOAA Weather Radio NOAA/NWS, rev. 2021 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp222, n: 3, w: 2100, h: 800 },
+    ],
+  },
+  {
+    id: "e74ed9511d24c6",
+    title: "Family Emergency Communication Plan (fill-in form)",
+    credit: { en: "FEMA P-1095, 2017 · US Government public domain", id: "FEMA P-1095, 2017 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp223, n: 1, w: 900, h: 1800 },
+    ],
+  },
+  {
+    id: "68b98222512b05",
+    title: "Tsunami Safety (NWS one-pager)",
+    credit: { en: "NOAA / NWS Tsunami Safety one-pager, 2019 · US Government public domain", id: "NOAA/NWS lembar Tsunami Safety, 2019 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp224, n: 1, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "53da8d3443e35e",
+    title: "Commuter Emergency Plan (fill-in form)",
+    credit: { en: "FEMA Ready Campaign, 2013 · US Government public domain", id: "FEMA Ready Campaign, 2013 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp225, n: 1, w: 900, h: 1650 },
+    ],
+  },
+  {
+    id: "a7a60dbbb26052",
+    title: "Be Prepared for a Tsunami",
+    credit: { en: "FEMA / Ready.gov hazard info sheet, 2024 · US Government public domain", id: "FEMA/Ready.gov lembar info bahaya tsunami, 2024 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp226, n: 2, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "dee61b224a1299",
+    title: "Be Prepared for a Flood",
+    credit: { en: "FEMA V-1005 hazard info sheet, 2018 · US Government public domain", id: "FEMA V-1005 lembar info bahaya banjir, 2018 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp227, n: 2, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "2aadecc420798e",
+    title: "Be Prepared for a Landslide",
+    credit: { en: "FEMA V-1007 hazard info sheet, 2018 · US Government public domain", id: "FEMA V-1007 lembar info bahaya longsor, 2018 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp228, n: 1, w: 900, h: 1650 },
+    ],
+  },
+  {
+    id: "11c57afd0384b8",
+    title: "Topographic Map Symbols",
+    credit: { en: "USGS Topographic Map Symbols, General Interest Publication · US Government public domain", id: "USGS Topographic Map Symbols, General Interest Publication · domain publik pemerintah AS" },
+    pages: [
+    { src: bp229, n: 1, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "d2213d245d582c",
+    title: "5 Steps to Portable Generator Safety",
+    credit: { en: "U.S. Fire Administration handout · US Government public domain", id: "U.S. Fire Administration, selebaran keselamatan generator · domain publik pemerintah AS" },
+    pages: [
+    { src: bp230, n: 1, w: 800, h: 1650 },
+    ],
+  },
+  {
+    id: "e02dc81261aae7",
+    title: "Emergency Response Guidebook 2024",
+    credit: { en: "US DOT / PHMSA ERG 2024 · US Government public domain", id: "US DOT/PHMSA Emergency Response Guidebook 2024 · domain publik pemerintah AS" },
+    pages: [
+    { src: bp231, n: 358, w: 900, h: 1144 },
     ],
   },
 ];
