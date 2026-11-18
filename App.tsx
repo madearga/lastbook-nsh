@@ -26,16 +26,19 @@ function ReadingRow(props: { item: ReadItem }) {
   );
 }
 
-function Card(props: { title: string; hint: string; onPress: () => void; accent: string }) {
+function Card(props: { icon?: string; title: string; hint: string; onPress: () => void; accent: string }) {
   return (
     <View
       onPress={props.onPress}
       style={{
-        backgroundColor: "#ffffff", borderRadius: 12, padding: 14, gap: 2,
+        backgroundColor: "#ffffff", borderRadius: 12, padding: 14, gap: 4,
         borderLeftWidth: 4, borderLeftColor: props.accent,
       }}
     >
-      <Text style={{ fontSize: 16, fontWeight: "bold", color: "#1f2328" }}>{props.title}</Text>
+      <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
+        {props.icon ? <Text style={{ fontSize: 20 }}>{props.icon}</Text> : null}
+        <Text style={{ fontSize: 16, fontWeight: "bold", color: "#1f2328" }}>{props.title}</Text>
+      </View>
       <Text style={{ fontSize: 12, color: "#57606a" }}>{props.hint}</Text>
     </View>
   );
@@ -60,7 +63,8 @@ function App() {
           <Each of={TOPICS}>
             {(t) => (
               <Card
-                title={`${ICON[t().id] ?? "📖"}  ${t().title}`}
+                icon={ICON[t().id] ?? "📖"}
+                title={t().title}
                 hint={t().short ?? ""}
                 accent={ACCENT[t().id] ?? "#6e7781"}
                 onPress={() => { expanded.set(null); selected.set(t().id); }}
@@ -100,6 +104,7 @@ function App() {
                     accent={ACCENT[props.t.id] ?? "#6e7781"}
                     onPress={() => expanded.set(expanded() === c().id ? null : c().id)}
                   />
+                  {/* dibaca dalam JSX supaya reaktif */}
                   {expanded() === c().id ? (
                     <View style={{ backgroundColor: "#ffffff", borderRadius: 12, padding: 12 }}>
                       <Each of={c().read}>{(r) => <ReadingRow item={r()} />}</Each>
@@ -137,8 +142,8 @@ function App() {
     </Scroll>
   );
 
-  const t = topic();
-  return t ? <Detail t={t} /> : <Home />;
+  // Branch reaktif: signal dibaca DI DALAM ekspresi JSX, bukan di badan komponen.
+  return <View style={{ flex: 1 }}>{topic() ? <Detail t={topic()!} /> : <Home />}</View>;
 }
 
 mount(App);
