@@ -176,3 +176,14 @@ test("maps screen opens from home and closes back", async () => {
   await app.press("‹ Kembali");
   await app.waitFor(WATER);
 });
+
+test("a map saved in storage counts on home and survives restart", async () => {
+  const pack = '{"v":1,"id":"id-bali","name":{"id":"Bali","en":"Bali"},"bbox":[114.4,-8.9,115.8,-8.0],"lines":[],"places":[]}';
+  const app = await open("./App.tsx", { storage: { "lastbook.prefs": '{"lang":"id"}', "peta/id-bali": pack } });
+  await app.waitFor(WATER);
+  await app.waitFor("1 peta tersimpan di HP ini. Pilih dan unduh lagi.");
+  await app.press("Pilih peta");
+  await app.waitFor("Peta offline");
+  await app.press("‹ Kembali");
+  await app.waitFor(WATER);
+});

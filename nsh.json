@@ -3,8 +3,8 @@
   "id": "com.argakuka.lastbook",
   "appearance": "system",
   "theme": "theme.json",
-  "version": "0.9.0",
-  "build": 13,
+  "version": "0.9.1",
+  "build": 14,
   "updater": {
     "github": "madearga/lastbook-nsh",
     "publicKey": "Jg3ArqdpDEMg05kRcMiimcsiKHbucIz8fh9WLl3Ajek=",
@@ -18,14 +18,6 @@
     "network": {
       "hosts": [
         "raw.githubusercontent.com"
-      ]
-    },
-    "fs": {
-      "read": [
-        "${dataDir}/peta"
-      ],
-      "write": [
-        "${dataDir}/peta"
       ]
     },
     "statusBar": true

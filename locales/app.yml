@@ -285,7 +285,7 @@ maps.title:
   en: "Offline maps"
   id: "Peta offline"
 maps.note:
-  en: "Download only the areas you want. Each map is a vector file drawn on the phone: no internet needed after it is saved, and it stays out of the app package."
+  en: "Download only the areas you want. Each map is drawn on the phone: no internet needed after it is saved, and it stays out of the app package."
   id: "Unduh hanya wilayah yang kamu mau. Tiap peta berupa berkas vektor yang digambar di HP: tidak perlu internet setelah tersimpan, dan tidak ikut membesarkan paket aplikasi."
 maps.home_note:
   en: "%{n} map saved on this phone. Choose and download more."

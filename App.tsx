@@ -225,14 +225,14 @@ function App() {
     if (mapBusy() != null) return;
     try {
       mapBusy.set(r.id);
+      mapErr.set("");
       await download(r);
       onDevice.set(await saved());
       Haptics.selection();
       await showMap(r);
     } catch (e) {
+      // Tetap di daftar: galat unduhan bukan galat peta.
       mapErr.set(`${ti("maps.failed")} ${String(e)}`);
-      mapsOpen.set(true);
-      openMap.set(r);
     } finally {
       mapBusy.set(null);
     }
@@ -826,6 +826,9 @@ function App() {
         <Scroll class="flex-1">
           <View class="w-full max-w-[680px] self-center px-5 pt-4 pb-12 gap-3">
             <Text class="text-[13px] leading-[19px] text-muted-foreground">{ti("maps.note")}</Text>
+            <If when={mapErr() !== ""}>
+              <Text class="text-[13px] text-destructive">{mapErr()}</Text>
+            </If>
             <If
               when={regions() == null}
               else={
