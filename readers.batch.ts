@@ -99,6 +99,75 @@ import bp095 from "./assets/1693406275fcc129/p-02.png";
 import bp096 from "./assets/ec27c9c3c6b74c/p-81.png";
 import bp097 from "./assets/ec27c9c3c6b74c/p-109.png";
 import bp098 from "./assets/ec27c9c3c6b74c/p-110.png";
+import bp099 from "./assets/med-443ae5cfaa6ecc68/p-01.png";
+import bp100 from "./assets/med-443ae5cfaa6ecc68/p-02.png";
+import bp101 from "./assets/med-443ae5cfaa6ecc68/p-05.png";
+import bp102 from "./assets/med-443ae5cfaa6ecc68/p-09.png";
+import bp103 from "./assets/med-443ae5cfaa6ecc68/p-12.png";
+import bp104 from "./assets/med-443ae5cfaa6ecc68/p-13.png";
+import bp105 from "./assets/med-443ae5cfaa6ecc68/p-14.png";
+import bp106 from "./assets/med-443ae5cfaa6ecc68/p-16.png";
+import bp107 from "./assets/med-443ae5cfaa6ecc68/p-19.png";
+import bp108 from "./assets/med-443ae5cfaa6ecc68/p-22.png";
+import bp109 from "./assets/med-443ae5cfaa6ecc68/p-24.png";
+import bp110 from "./assets/med-443ae5cfaa6ecc68/p-28.png";
+import bp111 from "./assets/med-443ae5cfaa6ecc68/p-29.png";
+import bp112 from "./assets/med-443ae5cfaa6ecc68/p-30.png";
+import bp113 from "./assets/med-443ae5cfaa6ecc68/p-36.png";
+import bp114 from "./assets/med-443ae5cfaa6ecc68/p-38.png";
+import bp115 from "./assets/med-443ae5cfaa6ecc68/p-51.png";
+import bp116 from "./assets/med-443ae5cfaa6ecc68/p-55.png";
+import bp117 from "./assets/med-443ae5cfaa6ecc68/p-57.png";
+import bp118 from "./assets/med-443ae5cfaa6ecc68/p-60.png";
+import bp119 from "./assets/med-953dfe1df69e0773/p-03.png";
+import bp120 from "./assets/med-953dfe1df69e0773/p-04.png";
+import bp121 from "./assets/med-953dfe1df69e0773/p-05.png";
+import bp122 from "./assets/med-953dfe1df69e0773/p-08.png";
+import bp123 from "./assets/med-953dfe1df69e0773/p-23.png";
+import bp124 from "./assets/med-953dfe1df69e0773/p-24.png";
+import bp125 from "./assets/med-953dfe1df69e0773/p-25.png";
+import bp126 from "./assets/med-8bd4770a63b99cc6/p-20.png";
+import bp127 from "./assets/med-8bd4770a63b99cc6/p-22.png";
+import bp128 from "./assets/med-8bd4770a63b99cc6/p-25.png";
+import bp129 from "./assets/med-8bd4770a63b99cc6/p-29.png";
+import bp130 from "./assets/med-d9ac20e4a9829e89/p-07.png";
+import bp131 from "./assets/med-d9ac20e4a9829e89/p-08.png";
+import bp132 from "./assets/med-a840a35b017c5748/p-02.png";
+import bp133 from "./assets/med-a840a35b017c5748/p-03.png";
+import bp134 from "./assets/med-a840a35b017c5748/p-31.png";
+import bp135 from "./assets/med-f0d080c42e81de5f/p-07.png";
+import bp136 from "./assets/med-f0d080c42e81de5f/p-13.png";
+import bp137 from "./assets/med-f0d080c42e81de5f/p-20.png";
+import bp138 from "./assets/med-c8a380e07e30f3e3/p-19.png";
+import bp139 from "./assets/med-ea4055db35ff180d/p-12.png";
+import bp140 from "./assets/med-ea4055db35ff180d/p-21.png";
+import bp141 from "./assets/med-ea4055db35ff180d/p-23.png";
+import bp142 from "./assets/med-ea4055db35ff180d/p-24.png";
+import bp143 from "./assets/med-ea4055db35ff180d/p-29.png";
+import bp144 from "./assets/med-ea4055db35ff180d/p-36.png";
+import bp145 from "./assets/med-0e083d57bbe5021a/p-12.png";
+import bp146 from "./assets/med-2ca695c9db63d020/p-20.png";
+import bp147 from "./assets/med-2ca695c9db63d020/p-22.png";
+import bp148 from "./assets/med-2ca695c9db63d020/p-33.png";
+import bp149 from "./assets/med-2ca695c9db63d020/p-35.png";
+import bp150 from "./assets/med-e7a8569d25995a83/p-15.png";
+import bp151 from "./assets/med-e7a8569d25995a83/p-24.png";
+import bp152 from "./assets/med-304a093a918ce1d6/p-16.png";
+import bp153 from "./assets/med-f65faa1b8cb4c8f9/p-01.png";
+import bp154 from "./assets/med-d60d65e8fbbab512/p-01.png";
+import bp155 from "./assets/med-683f49e28486c712/p-01.png";
+import bp156 from "./assets/med-4453675fb0dcc5d9/p-03.png";
+import bp157 from "./assets/med-323535ddfa576a04/p-03.png";
+import bp158 from "./assets/med-323535ddfa576a04/p-07.png";
+import bp159 from "./assets/med-0faf49d8c0bd8eb2/p-08.png";
+import bp160 from "./assets/med-3a93d7d4c97d404d/p-02.png";
+import bp161 from "./assets/med-3a93d7d4c97d404d/p-03.png";
+import bp162 from "./assets/med-3a93d7d4c97d404d/p-04.png";
+import bp163 from "./assets/med-c6ff5672759900f4/p-01.png";
+import bp164 from "./assets/med-9691a9d4a1231acf/p-01.png";
+import bp165 from "./assets/med-d57916742d1eec74/p-02.png";
+import bp166 from "./assets/med-d57916742d1eec74/p-04.png";
+import bp167 from "./assets/med-68adb7585ea5d7e0/p-25.png";
 
 export type BatchBook = {
   id: string;
@@ -324,6 +393,236 @@ export const BATCH_BOOKS: BatchBook[] = [
     { src: bp096, w: 900, h: 1444 },  // hal. 81
     { src: bp097, w: 900, h: 1448 },  // hal. 109
     { src: bp098, w: 900, h: 1483 },  // hal. 110
+    ],
+  },
+  {
+    id: "med-443ae5cfaa6ecc68",
+    title: "Where There Is No Doctor — First Aid",
+    credit: { en: "Hesperian, New Where There Is No Doctor — First Aid chapters · CC BY-SA (hesperian.org)", id: "Hesperian, New Where There Is No Doctor — Bab Pertolongan Pertama · CC BY-SA (hesperian.org)" },
+    pages: [
+    { src: bp099, w: 900, h: 1463 },  // hal. 1
+    { src: bp100, w: 900, h: 1463 },  // hal. 2
+    { src: bp101, w: 900, h: 1463 },  // hal. 5
+    { src: bp102, w: 900, h: 1463 },  // hal. 9
+    { src: bp103, w: 900, h: 1463 },  // hal. 12
+    { src: bp104, w: 900, h: 1463 },  // hal. 13
+    { src: bp105, w: 900, h: 1463 },  // hal. 14
+    { src: bp106, w: 900, h: 1463 },  // hal. 16
+    { src: bp107, w: 900, h: 1463 },  // hal. 19
+    { src: bp108, w: 900, h: 1463 },  // hal. 22
+    { src: bp109, w: 900, h: 1463 },  // hal. 24
+    { src: bp110, w: 900, h: 1463 },  // hal. 28
+    { src: bp111, w: 900, h: 1463 },  // hal. 29
+    { src: bp112, w: 900, h: 1463 },  // hal. 30
+    { src: bp113, w: 900, h: 1463 },  // hal. 36
+    { src: bp114, w: 900, h: 1463 },  // hal. 38
+    { src: bp115, w: 900, h: 1463 },  // hal. 51
+    { src: bp116, w: 900, h: 1463 },  // hal. 55
+    { src: bp117, w: 900, h: 1463 },  // hal. 57
+    { src: bp118, w: 900, h: 1463 },  // hal. 60
+    ],
+  },
+  {
+    id: "med-953dfe1df69e0773",
+    title: "WTND — Water & Sanitation",
+    credit: { en: "Hesperian, New WTND — Water and Sanitation: Keys to Staying Healthy · CC BY-SA", id: "Hesperian, New WTND — Air & Sanitasi: Kunci Tetap Sehat · CC BY-SA" },
+    pages: [
+    { src: bp119, w: 900, h: 1463 },  // hal. 3
+    { src: bp120, w: 900, h: 1463 },  // hal. 4
+    { src: bp121, w: 800, h: 1463 },  // hal. 5
+    { src: bp122, w: 800, h: 1463 },  // hal. 8
+    { src: bp123, w: 800, h: 1463 },  // hal. 23
+    { src: bp124, w: 800, h: 1463 },  // hal. 24
+    { src: bp125, w: 800, h: 1463 },  // hal. 25
+    ],
+  },
+  {
+    id: "med-8bd4770a63b99cc6",
+    title: "WTND — Belly Pain, Diarrhea & Worms",
+    credit: { en: "Hesperian, New WTND — Belly Pain, Diarrhea, and Worms · CC BY-SA", id: "Hesperian, New WTND — Sakit Perut, Diare & Cacingan · CC BY-SA" },
+    pages: [
+    { src: bp126, w: 900, h: 1463 },  // hal. 20
+    { src: bp127, w: 900, h: 1463 },  // hal. 22
+    { src: bp128, w: 900, h: 1463 },  // hal. 25
+    { src: bp129, w: 900, h: 1463 },  // hal. 29
+    ],
+  },
+  {
+    id: "med-d9ac20e4a9829e89",
+    title: "WTND — Caring for Children (dehydration)",
+    credit: { en: "Hesperian, New WTND — Caring for Children chapter · CC BY-SA", id: "Hesperian, New WTND — Bab Merawat Anak (dehidrasi) · CC BY-SA" },
+    pages: [
+    { src: bp130, w: 900, h: 1463 },  // hal. 7
+    { src: bp131, w: 800, h: 1463 },  // hal. 8
+    ],
+  },
+  {
+    id: "med-a840a35b017c5748",
+    title: "WTND — Diabetes",
+    credit: { en: "Hesperian, New WTND — Diabetes chapter · CC BY-SA", id: "Hesperian, New WTND — Bab Diabetes · CC BY-SA" },
+    pages: [
+    { src: bp132, w: 900, h: 1463 },  // hal. 2
+    { src: bp133, w: 900, h: 1463 },  // hal. 3
+    { src: bp134, w: 800, h: 1463 },  // hal. 31
+    ],
+  },
+  {
+    id: "med-f0d080c42e81de5f",
+    title: "WTND — Heart Disease & Blood Pressure",
+    credit: { en: "Hesperian, New WTND — Heart Disease and High Blood Pressure · CC BY-SA", id: "Hesperian, New WTND — Penyakit Jantung & Tekanan Darah · CC BY-SA" },
+    pages: [
+    { src: bp135, w: 800, h: 1463 },  // hal. 7
+    { src: bp136, w: 800, h: 1463 },  // hal. 13
+    { src: bp137, w: 800, h: 1463 },  // hal. 20
+    ],
+  },
+  {
+    id: "med-c8a380e07e30f3e3",
+    title: "WTND — Pregnancy & Birth",
+    credit: { en: "Hesperian, New WTND — Pregnancy and Birth chapter · CC BY-SA", id: "Hesperian, New WTND — Bab Kehamilan & Kelahiran · CC BY-SA" },
+    pages: [
+    { src: bp138, w: 900, h: 1463 },  // hal. 19
+    ],
+  },
+  {
+    id: "med-ea4055db35ff180d",
+    title: "CGEH — Protecting Community Water",
+    credit: { en: "Hesperian, A Community Guide to Environmental Health ch.6 (2012) · CC BY-SA", id: "Hesperian, Community Guide to Environmental Health bab.6 (2012) · CC BY-SA" },
+    pages: [
+    { src: bp139, w: 900, h: 1388 },  // hal. 12
+    { src: bp140, w: 800, h: 1388 },  // hal. 21
+    { src: bp141, w: 900, h: 1388 },  // hal. 23
+    { src: bp142, w: 800, h: 1388 },  // hal. 24
+    { src: bp143, w: 900, h: 1388 },  // hal. 29
+    { src: bp144, w: 900, h: 1388 },  // hal. 36
+    ],
+  },
+  {
+    id: "med-0e083d57bbe5021a",
+    title: "CGEH — Building Toilets",
+    credit: { en: "Hesperian, A Community Guide to Environmental Health ch.7 (2012) · CC BY-SA", id: "Hesperian, Community Guide to Environmental Health bab.7 (2012) · CC BY-SA" },
+    pages: [
+    { src: bp145, w: 900, h: 1388 },  // hal. 12
+    ],
+  },
+  {
+    id: "med-2ca695c9db63d020",
+    title: "CGEH — Sustainable Farming",
+    credit: { en: "Hesperian, A Community Guide to Environmental Health ch.15 (2012) · CC BY-SA", id: "Hesperian, Community Guide to Environmental Health bab.15 (2012) · CC BY-SA" },
+    pages: [
+    { src: bp146, w: 800, h: 1388 },  // hal. 20
+    { src: bp147, w: 800, h: 1388 },  // hal. 22
+    { src: bp148, w: 800, h: 1388 },  // hal. 33
+    { src: bp149, w: 800, h: 1388 },  // hal. 35
+    ],
+  },
+  {
+    id: "med-e7a8569d25995a83",
+    title: "CGEH — Solid Waste",
+    credit: { en: "Hesperian, A Community Guide to Environmental Health ch.18 (2012) · CC BY-SA", id: "Hesperian, Community Guide to Environmental Health bab.18 (2012) · CC BY-SA" },
+    pages: [
+    { src: bp150, w: 800, h: 1388 },  // hal. 15
+    { src: bp151, w: 900, h: 1388 },  // hal. 24
+    ],
+  },
+  {
+    id: "med-304a093a918ce1d6",
+    title: "CGEH — Unsafe Water",
+    credit: { en: "Hesperian, A Community Guide to Environmental Health ch.5 (2012) · CC BY-SA", id: "Hesperian, Community Guide to Environmental Health bab.5 (2012) · CC BY-SA" },
+    pages: [
+    { src: bp152, w: 900, h: 1388 },  // hal. 16
+    ],
+  },
+  {
+    id: "med-f65faa1b8cb4c8f9",
+    title: "Disabled Village Children — Pressure Sores",
+    credit: { en: "Hesperian, Disabled Village Children ch.24 · CC BY-SA", id: "Hesperian, Disabled Village Children bab.24 · CC BY-SA" },
+    pages: [
+    { src: bp153, w: 800, h: 1613 },  // hal. 1
+    ],
+  },
+  {
+    id: "med-d60d65e8fbbab512",
+    title: "Women with Disabilities — Caregivers",
+    credit: { en: "Hesperian, A Health Handbook for Women with Disabilities ch.15 (2008) · CC BY-SA", id: "Hesperian, Health Handbook for Women with Disabilities bab.15 (2008) · CC BY-SA" },
+    pages: [
+    { src: bp154, w: 900, h: 1388 },  // hal. 1
+    ],
+  },
+  {
+    id: "med-683f49e28486c712",
+    title: "Workers' Guide — Dust",
+    credit: { en: "Hesperian, A Workers' Guide to Health and Safety ch.12 (2015) · CC BY-SA", id: "Hesperian, Workers' Guide to Health and Safety bab.12 (2015) · CC BY-SA" },
+    pages: [
+    { src: bp155, w: 900, h: 1388 },  // hal. 1
+    ],
+  },
+  {
+    id: "med-4453675fb0dcc5d9",
+    title: "Workers' Guide — Eye Protection",
+    credit: { en: "Hesperian, A Workers' Guide to Health and Safety ch.18 (2015) · CC BY-SA", id: "Hesperian, Workers' Guide to Health and Safety bab.18 (2015) · CC BY-SA" },
+    pages: [
+    { src: bp156, w: 800, h: 1388 },  // hal. 3
+    ],
+  },
+  {
+    id: "med-323535ddfa576a04",
+    title: "Mental Health — People in Crisis",
+    credit: { en: "Hesperian, Promoting Community Mental Health ch.4 (2025) · CC BY-SA", id: "Hesperian, Promoting Community Mental Health bab.4 (2025) · CC BY-SA" },
+    pages: [
+    { src: bp157, w: 800, h: 1388 },  // hal. 3
+    { src: bp158, w: 800, h: 1388 },  // hal. 7
+    ],
+  },
+  {
+    id: "med-0faf49d8c0bd8eb2",
+    title: "Mental Health — Emotional Support",
+    credit: { en: "Hesperian, Promoting Community Mental Health ch.2 (2025) · CC BY-SA", id: "Hesperian, Promoting Community Mental Health bab.2 (2025) · CC BY-SA" },
+    pages: [
+    { src: bp159, w: 900, h: 1388 },  // hal. 8
+    ],
+  },
+  {
+    id: "med-3a93d7d4c97d404d",
+    title: "WHO TN 5 — Emergency drinking water",
+    credit: { en: "WHO/WEDC Technical Notes on Drinking-Water #5 (2013)", id: "WHO/WEDC Technical Notes tentang Air Minum #5 (2013)" },
+    pages: [
+    { src: bp160, w: 800, h: 1754 },  // hal. 2
+    { src: bp161, w: 800, h: 1754 },  // hal. 3
+    { src: bp162, w: 800, h: 1754 },  // hal. 4
+    ],
+  },
+  {
+    id: "med-c6ff5672759900f4",
+    title: "WHO TN 7 — Solid waste in emergencies",
+    credit: { en: "WHO/WEDC Technical Notes on Drinking-Water #7 (2013)", id: "WHO/WEDC Technical Notes tentang Air Minum #7 (2013)" },
+    pages: [
+    { src: bp163, w: 800, h: 1754 },  // hal. 1
+    ],
+  },
+  {
+    id: "med-9691a9d4a1231acf",
+    title: "WHO TN 9 — How much water is needed",
+    credit: { en: "WHO/WEDC Technical Notes on Drinking-Water #9 (2013)", id: "WHO/WEDC Technical Notes tentang Air Minum #9 (2013)" },
+    pages: [
+    { src: bp164, w: 800, h: 1754 },  // hal. 1
+    ],
+  },
+  {
+    id: "med-d57916742d1eec74",
+    title: "WHO TN 14 — Excreta disposal options",
+    credit: { en: "WHO/WEDC Technical Notes on Drinking-Water #14 (2013)", id: "WHO/WEDC Technical Notes tentang Air Minum #14 (2013)" },
+    pages: [
+    { src: bp165, w: 800, h: 1754 },  // hal. 2
+    { src: bp166, w: 800, h: 1754 },  // hal. 4
+    ],
+  },
+  {
+    id: "med-68adb7585ea5d7e0",
+    title: "WHO-ICRC Basic Emergency Care",
+    credit: { en: "WHO-ICRC Basic Emergency Care: approach to the acutely ill and injured (2018) · CC BY-NC-SA 3.0 IGO", id: "WHO-ICRC Basic Emergency Care (2018) · CC BY-NC-SA 3.0 IGO" },
+    pages: [
+    { src: bp167, w: 900, h: 1754 },  // hal. 25
     ],
   },
 ];
