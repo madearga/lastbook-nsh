@@ -42,11 +42,13 @@ HEADER = """// DIHASILKAN oleh tools/integrate.py — jangan edit tangan.
 // Sumber: assets/books.yml + assets/<id>/p-NN.png
 """
 
-TYPE = """export type BatchBook = {
+TYPE = """import type { ImageAsset } from "nsh";
+
+export type BatchBook = {
   id: string;
   title: string;
   credit: { en: string; id: string };
-  pages: { src: string; n: number; w: number; h: number }[];
+  pages: { src: string | ImageAsset; n: number; w: number; h: number }[];
 };
 """
 

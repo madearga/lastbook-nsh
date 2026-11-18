@@ -1,4 +1,4 @@
-import { batch, computed, createMotion, effect, Image, mount, reduceMotion, Scroll, signal, Storage, Text, View, windowSize } from "nsh";
+import { batch, Canvas, type CanvasRenderingContext2D, computed, createMotion, effect, Image, mount, PanResponder, reduceMotion, Scroll, signal, Storage, Text, View, windowSize } from "nsh";
 import type { ScrollRef } from "nsh";
 import { t as ti, setLocale } from "nsh/i18n";
 import { Collapsible, Input } from "nsh/base";
@@ -6,6 +6,7 @@ import { BackHandler, Haptics } from "nsh/mobile";
 import { checkForPackage, downloadPackage, runningPackage, shellInfo } from "nsh/updater";
 import { TOPICS, type Choice, type ReadItem, type Topic } from "./topics";
 import { bookOf, type Book } from "./readers";
+import { catalogue, download, pack, remove, saved, type MapName, type MapPack, type MapRegion } from "./maps";
 
 // Lastbook mobile — UI v0.5: dua bahasa (nsh/i18n, locales/app.yml), pembaca PDF
 // navigasi bagian, kartu situasi yang membuka dengan pegas, ukuran teks baca,
@@ -29,7 +30,7 @@ const TONE: Record<Tone, { bar: string; tile: string; text: string }> = {
   brown: { bar: "border-l-tone-brown", tile: "bg-tone-brown/15", text: "text-tone-brown" },
 };
 
-type Meta = { icon: string; tone: Tone; name: string; keys: string };
+type Meta = { icon: string; tone: Tone; name: { id: string; en: string }; keys: string };
 
 const META: Record<string, Meta> = {
   comms: { icon: "📡", tone: "blue", name: { id: "Komunikasi & arah", en: "Comms & navigation" }, keys: "komunikasi radio telepon hp sinyal internet keluarga kabar peta kompas arah navigasi tersesat" },
@@ -49,11 +50,11 @@ const META: Record<string, Meta> = {
 };
 const FALLBACK: Meta = { icon: "📖", tone: "slate", name: { id: "Topik", en: "Topic" }, keys: "" };
 const meta = (id: string): Meta => META[id] ?? FALLBACK;
-const mname = (m: Meta) => m.name[langPref()] ?? m.name.id;
+const mname = (m: Meta) => (langPref() === "en" ? m.name.en : m.name.id);
 
 // Pembaca PDF: dokumen harus punya halaman yang sudah dirender di registry.
 const canRead = (item: ReadItem) => {
-  const b = bookOf(item.doc);
+  const b = bookOf(item.doc ?? "");
   return !!b && typeof item.page === "number" && b.pages.some((p) => p.n === item.page);
 };
 
@@ -115,6 +116,17 @@ function App() {
   const upd = signal<"idle" | "busy" | "ready" | "error">("idle");
   const updMsg = signal<string>("");
   const reader = signal<{ doc: string; page: number } | null>(null);
+  // Peta offline: katalog, peta tersimpan di perangkat, dan peta yang sedang dibuka.
+  const mapsOpen = signal(false);
+  const regions = signal<MapRegion[] | null>(null);
+  const catErr = signal("");
+  const onDevice = signal<Record<string, number>>({});
+  const openMap = signal<MapRegion | null>(null);
+  const mapData = signal<MapPack | null>(null);
+  const mapErr = signal("");
+  const mapBusy = signal<string | null>(null);
+  const mapPan = signal({ x: 0, y: 0 });
+  const mapZoom = signal(1);
 
   // Preferensi di perangkat: ukuran teks & riwayat. Ditulis hanya setelah dibaca.
   Storage.getItem(PREFS_KEY)
@@ -131,6 +143,9 @@ function App() {
     })
     .catch(() => {})
     .finally(() => loaded.set(true));
+  saved()
+    .then((x) => onDevice.set(x))
+    .catch(() => {});
   effect(() => {
     const prefs = JSON.stringify({ lang: langPref(), large: large(), recent: recent() });
     if (loaded()) Storage.setItem(PREFS_KEY, prefs).catch(() => {});
@@ -151,6 +166,17 @@ function App() {
   }
   // Android: tombol/gestur kembali menutup topik dulu, baru keluar aplikasi.
   BackHandler.on("press", () => {
+    if (openMap() != null) {
+      openMap.set(null);
+      mapData.set(null);
+      mapPan.set({ x: 0, y: 0 });
+      mapZoom.set(1);
+      return true;
+    }
+    if (mapsOpen()) {
+      mapsOpen.set(false);
+      return true;
+    }
     if (reader() != null) {
       reader.set(null);
       return true;
@@ -179,6 +205,53 @@ function App() {
       upd.set("error");
       updMsg.set(`${ti("updates.failed")} ${String(e)}`);
     }
+  }
+
+  async function openMaps() {
+    Haptics.selection();
+    mapsOpen.set(true);
+    onDevice.set(await saved().catch(() => ({})));
+    if (regions() == null) await loadCatalogue();
+  }
+  async function loadCatalogue() {
+    try {
+      catErr.set("");
+      regions.set(await catalogue());
+    } catch (e) {
+      catErr.set(String(e));
+    }
+  }
+  async function saveMap(r: MapRegion) {
+    if (mapBusy() != null) return;
+    try {
+      mapBusy.set(r.id);
+      await download(r);
+      onDevice.set(await saved());
+      Haptics.selection();
+      await showMap(r);
+    } catch (e) {
+      mapErr.set(`${ti("maps.failed")} ${String(e)}`);
+      mapsOpen.set(true);
+      openMap.set(r);
+    } finally {
+      mapBusy.set(null);
+    }
+  }
+  async function showMap(r: MapRegion) {
+    try {
+      mapErr.set("");
+      mapData.set(null);
+      openMap.set(r);
+      mapPan.set({ x: 0, y: 0 });
+      mapZoom.set(1);
+      mapData.set(await pack(r));
+    } catch (e) {
+      mapErr.set(`${ti("maps.failed")} ${String(e)}`);
+    }
+  }
+  async function dropMap(r: MapRegion) {
+    await remove(r).catch(() => {});
+    onDevice.set(await saved());
   }
 
   const topic = (): Topic | undefined => TOPICS.find((t) => t.id === selected());
@@ -331,6 +404,20 @@ function App() {
         </If>
 
         <View class="gap-2 pt-2">
+          <Text class="text-[13px] font-bold uppercase tracking-wider text-foreground">{ti("maps.title")}</Text>
+          <View class="bg-card rounded-(--radius-card) border border-border p-4 gap-2.5">
+            <Text class="text-[13px] text-muted-foreground">{ti("maps.home_note", { n: Object.keys(onDevice()).length })}</Text>
+            <View
+              role="button"
+              onPress={openMaps}
+              class="self-start h-10 px-4 rounded-(--radius) bg-primary items-center justify-center transition-transform duration-150 ease-out active:scale-[0.97]"
+            >
+              <Text class="text-sm font-semibold text-primary-foreground">{ti("maps.open_list")}</Text>
+            </View>
+          </View>
+        </View>
+
+        <View class="gap-2 pt-2">
           <Text class="text-[13px] font-bold uppercase tracking-wider text-foreground">{ti("updates.title")}</Text>
           <View class="bg-card rounded-(--radius-card) border border-border p-4 gap-2.5">
             <Text class="text-[13px] text-muted-foreground">
@@ -389,7 +476,7 @@ function App() {
               accessibilityLabel={ti("read.open_page", { n: props.item.page ?? 0 })}
               onPress={() => {
                 Haptics.selection();
-                reader.set({ doc: props.item.doc, page: props.item.page ?? 1 });
+                reader.set({ doc: props.item.doc ?? "", page: props.item.page ?? 1 });
               }}
               class="self-start mt-1 px-2.5 py-1 rounded-(--radius-pill) bg-primary/15 border border-primary/40 transition duration-150 ease-out active:scale-[0.97]"
             >
@@ -509,7 +596,7 @@ function App() {
             <Text class="text-[16px] font-semibold text-primary">{ti("detail.all_topics")}</Text>
           </View>
           <View class="flex-1 items-center">
-            {scrolled() ? <Text class="text-[15px] font-semibold text-foreground line-clamp-1">{m.name}</Text> : null}
+            {scrolled() ? <Text class="text-[15px] font-semibold text-foreground line-clamp-1">{mname(m)}</Text> : null}
           </View>
           <View
             role="button"
@@ -670,6 +757,218 @@ function App() {
     </View>
   );
 
+  // Peta offline: pilih wilayah, unduh, lalu geser/zoom. Vektor digambar di Canvas.
+  const rname = (n: MapName) => (langPref() === "en" ? n.en : n.id);
+  const kb = (b: number) => (b >= 1048576 ? `${(b / 1048576).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`);
+
+  const MapRow = (props: { r: MapRegion }) => {
+    const have = () => onDevice()[props.r.id];
+    const busy = () => mapBusy() === props.r.id;
+    return (
+      <View class="bg-card rounded-(--radius-card) border border-border p-3.5 gap-2.5">
+        <View class="flex-row items-center gap-2">
+          <Text class="flex-1 text-[16px] font-semibold text-foreground line-clamp-1">{rname(props.r.name)}</Text>
+          <Text class="text-[12px] text-muted-foreground">{kb(have() ?? props.r.bytes)}</Text>
+        </View>
+        <View class="flex-row gap-2">
+          <If
+            when={have() == null}
+            else={
+              <View class="flex-row gap-2">
+                <View
+                  role="button"
+                  onPress={() => showMap(props.r)}
+                  class="flex-1 h-10 rounded-(--radius) bg-primary items-center justify-center transition duration-150 ease-out active:scale-[0.97]"
+                >
+                  <Text class="text-sm font-semibold text-primary-foreground">{ti("maps.open")}</Text>
+                </View>
+                <View
+                  role="button"
+                  onPress={() => dropMap(props.r)}
+                  class="h-10 px-4 rounded-(--radius) bg-card border border-border items-center justify-center transition duration-150 ease-out active:scale-[0.97]"
+                >
+                  <Text class="text-sm font-semibold text-foreground">{ti("maps.remove")}</Text>
+                </View>
+              </View>
+            }
+          >
+            <View
+              role="button"
+              onPress={() => saveMap(props.r)}
+              disabled={busy()}
+              class="flex-1 h-10 rounded-(--radius) bg-primary items-center justify-center transition duration-150 ease-out active:scale-[0.97] disabled:opacity-60"
+            >
+              <Text class="text-sm font-semibold text-primary-foreground">
+                {busy() ? ti("maps.downloading") : ti("maps.download")}
+              </Text>
+            </View>
+          </If>
+        </View>
+      </View>
+    );
+  };
+
+  const Maps = () => {
+    const used = () => Object.values(onDevice()).reduce((a, b) => a + b, 0);
+    return (
+      <View class="flex-1 bg-background">
+        <View class="flex-row items-center gap-2 px-3 pb-2 bg-background border-b border-border pt-[calc(env(safe-area-inset-top)+8px)]">
+          <View
+            role="button"
+            onPress={() => mapsOpen.set(false)}
+            class="h-11 px-2 rounded-(--radius) justify-center transition-colors duration-150 active:bg-accent"
+          >
+            <Text class="text-[16px] font-semibold text-primary">{ti("reader.back")}</Text>
+          </View>
+          <Text class="flex-1 text-[15px] font-semibold text-foreground">{ti("maps.title")}</Text>
+          <Text class="text-[12px] text-muted-foreground">{ti("maps.used", { n: kb(used()) })}</Text>
+        </View>
+        <Scroll class="flex-1">
+          <View class="w-full max-w-[680px] self-center px-5 pt-4 pb-12 gap-3">
+            <Text class="text-[13px] leading-[19px] text-muted-foreground">{ti("maps.note")}</Text>
+            <If
+              when={regions() == null}
+              else={
+                <View class="gap-2.5">
+                  <Each of={regions() ?? []} key={(r: MapRegion) => r.id}>
+                    {(r) => <MapRow r={r()} />}
+                  </Each>
+                </View>
+              }
+            >
+              <If
+                when={catErr() === ""}
+                else={
+                  <View class="bg-card rounded-(--radius-card) border border-border p-4 gap-2.5">
+                    <Text class="text-[13px] text-destructive">{`${ti("maps.failed")} ${catErr()}`}</Text>
+                    <View
+                      role="button"
+                      onPress={() => loadCatalogue()}
+                      class="self-start h-10 px-4 rounded-(--radius) bg-primary items-center justify-center transition duration-150 ease-out active:scale-[0.97]"
+                    >
+                      <Text class="text-sm font-semibold text-primary-foreground">{ti("maps.retry")}</Text>
+                    </View>
+                  </View>
+                }
+              >
+                <Text class="text-[13px] text-muted-foreground">{ti("maps.loading")}</Text>
+              </If>
+            </If>
+          </View>
+        </Scroll>
+      </View>
+    );
+  };
+
+  // Warna tetap: Canvas tidak membaca token tema.
+  const MAP_INK = { coast: "#3f6b8a", border: "#9aa7b4", road: "#b07a34", river: "#6ba7c9", place: "#1f3a4a" };
+
+  const MapViewer = () => {
+    let start = { x: 0, y: 0 };
+    const pan = PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => {
+        start = mapPan();
+      },
+      onPanResponderMove: (_: unknown, g: { dx: number; dy: number }) => mapPan.set({ x: start.x + g.dx, y: start.y + g.dy }),
+    });
+    const zoomBy = (f: number) => {
+      Haptics.selection();
+      mapZoom.set(Math.min(24, Math.max(1, mapZoom() * f)));
+    };
+    const draw = (cx: CanvasRenderingContext2D, size: { width: number; height: number }) => {
+      const d = mapData();
+      if (!d) return;
+      const [w, s, e, n] = d.bbox;
+      const mid = (((s + n) / 2) * Math.PI) / 180;
+      const k = Math.min(size.width / ((e - w) * Math.cos(mid)), size.height / (n - s)) * mapZoom();
+      const ox = size.width / 2 + mapPan().x;
+      const oy = size.height / 2 + mapPan().y;
+      const X = (lon: number) => ox + (lon - (w + e) / 2) * Math.cos(mid) * k;
+      const Y = (lat: number) => oy - (lat - (s + n) / 2) * k;
+      cx.fillStyle = "#e9eff4";
+      cx.fillRect(0, 0, size.width, size.height);
+      for (const kind of ["river", "road", "border", "coast"] as const) {
+        cx.strokeStyle = MAP_INK[kind];
+        cx.lineWidth = kind === "coast" ? 1.3 : 0.9;
+        cx.setLineDash(kind === "border" ? [4, 3] : []);
+        cx.beginPath();
+        for (const line of d.lines) {
+          if (line.k !== kind || line.p.length < 4) continue;
+          cx.moveTo(X(line.p[0]), Y(line.p[1]));
+          for (let i = 2; i < line.p.length; i += 2) cx.lineTo(X(line.p[i]), Y(line.p[i + 1]));
+        }
+        cx.stroke();
+      }
+      cx.setLineDash([]);
+      cx.fillStyle = MAP_INK.place;
+      cx.font = "600 10px system-ui";
+      for (const pl of d.places) {
+        if (pl.r > 3 && mapZoom() < 3) continue;
+        const x = X(pl.p[0]);
+        const y = Y(pl.p[1]);
+        if (x < -40 || y < 0 || x > size.width + 40 || y > size.height) continue;
+        cx.beginPath();
+        cx.arc(x, y, pl.r === 1 ? 3 : 2, 0, Math.PI * 2);
+        cx.fill();
+        cx.fillText(pl.n, x + 4, y + 3);
+      }
+    };
+    return (
+      <View class="flex-1 bg-background">
+        <View class="flex-row items-center gap-2 px-3 pb-2 bg-background border-b border-border pt-[calc(env(safe-area-inset-top)+8px)]">
+          <View
+            role="button"
+            onPress={() => {
+              openMap.set(null);
+              mapData.set(null);
+            }}
+            class="h-11 px-2 rounded-(--radius) justify-center transition-colors duration-150 active:bg-accent"
+          >
+            <Text class="text-[16px] font-semibold text-primary">{ti("reader.back")}</Text>
+          </View>
+          <View class="flex-1">
+            <Text class="text-[15px] font-semibold text-foreground line-clamp-1">
+              {openMap() ? rname(openMap()!.name) : ""}
+            </Text>
+          </View>
+          <View role="button" onPress={() => zoomBy(1 / 1.6)} class="w-10 h-10 rounded-(--radius) bg-card border border-border items-center justify-center active:scale-[0.97]">
+            <Text class="text-[18px] font-bold text-foreground">−</Text>
+          </View>
+          <View role="button" onPress={() => zoomBy(1.6)} class="w-10 h-10 rounded-(--radius) bg-card border border-border items-center justify-center active:scale-[0.97]">
+            <Text class="text-[18px] font-bold text-foreground">+</Text>
+          </View>
+        </View>
+        <View class="flex-1" {...pan.panHandlers}>
+          <If
+            when={mapData() != null}
+            else={
+              <View class="flex-1 items-center justify-center px-6">
+                <Text class={`text-[13px] text-center ${mapErr() ? "text-destructive" : "text-muted-foreground"}`}>
+                  {mapErr() || ti("maps.loading")}
+                </Text>
+                <If when={mapErr() !== ""}>
+                  <View
+                    role="button"
+                    onPress={() => openMap() && showMap(openMap()!)}
+                    class="mt-3 h-10 px-4 rounded-(--radius) bg-primary items-center justify-center active:scale-[0.97]"
+                  >
+                    <Text class="text-sm font-semibold text-primary-foreground">{ti("maps.retry")}</Text>
+                  </View>
+                </If>
+              </View>
+            }
+          >
+            <Canvas style={{ height: windowSize().height - 210 }} draw={draw} />
+          </If>
+        </View>
+        <View class="px-4 py-3 border-t border-border bg-background pb-[calc(env(safe-area-inset-bottom)+12px)]">
+          <Text class="text-[12px] text-muted-foreground">{ti("maps.credit")}</Text>
+        </View>
+      </View>
+    );
+  };
+
   // Pembaca PDF: satu halaman FEMA 477, navigasi sebelumnya/berikutnya.
   const Reader = () => {
     const book = (): Book => bookOf(reader()?.doc ?? "")!;
@@ -706,7 +1005,7 @@ function App() {
               style={{ width: w, height: h }}
               class="rounded-(--radius-card) border border-border bg-card"
             />
-            <Text class="text-[12px] text-muted-foreground">{book().credit[langPref()] ?? book().credit.id}</Text>
+            <Text class="text-[12px] text-muted-foreground">{langPref() === "en" ? book().credit.en : book().credit.id}</Text>
           </View>
         </Scroll>
         <View class="flex-row items-center gap-3 px-4 py-3 pb-[calc(env(safe-area-inset-bottom)+12px)] border-t border-border bg-background">
@@ -734,7 +1033,17 @@ function App() {
   // Branch reaktif: signal dibaca DI DALAM ekspresi JSX, bukan di badan komponen.
   return (
     <View class="flex-1 bg-background">
-      {reader() != null ? <Reader /> : topic() ? <Detail t={topic()!} /> : <Home />}
+      {openMap() != null ? (
+        <MapViewer />
+      ) : mapsOpen() ? (
+        <Maps />
+      ) : reader() != null ? (
+        <Reader />
+      ) : topic() ? (
+        <Detail t={topic()!} />
+      ) : (
+        <Home />
+      )}
     </View>
   );
 }

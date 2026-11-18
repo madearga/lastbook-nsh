@@ -13,5 +13,21 @@
         "SBhyFBahGJGBaFEFGkTTGIZSlrbwkaQDmP1idQIQDmo="
       ]
     }
+  },
+  "capabilities": {
+    "network": {
+      "hosts": [
+        "raw.githubusercontent.com"
+      ]
+    },
+    "fs": {
+      "read": [
+        "${dataDir}/peta"
+      ],
+      "write": [
+        "${dataDir}/peta"
+      ]
+    },
+    "statusBar": true
   }
 }

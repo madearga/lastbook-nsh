@@ -1,6 +1,6 @@
 // Data topik asli dari Immortal-Protocols/lastbook (MIT): content/topics/*.json
 export type ReadItem = { label: string; note?: string; doc?: string; page?: number };
-export type Choice = { id: string; label: string; hint?: string; read: ReadItem[] };
+export type Choice = { id: string; label: string; hint?: string; goto?: string; read: ReadItem[] };
 export type Topic = {
   id: string; mode?: string; title: string; short?: string; intro?: string;
   choices?: Choice[]; limits?: { text: string }[];

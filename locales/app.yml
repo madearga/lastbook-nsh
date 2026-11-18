@@ -280,3 +280,43 @@ topic.shelter:
 topic.water:
   en: "Drinking water"
   id: "Air minum"
+
+maps.title:
+  en: "Offline maps"
+  id: "Peta offline"
+maps.note:
+  en: "Download only the areas you want. Each map is a vector file drawn on the phone: no internet needed after it is saved, and it stays out of the app package."
+  id: "Unduh hanya wilayah yang kamu mau. Tiap peta berupa berkas vektor yang digambar di HP: tidak perlu internet setelah tersimpan, dan tidak ikut membesarkan paket aplikasi."
+maps.home_note:
+  en: "%{n} map saved on this phone. Choose and download more."
+  id: "%{n} peta tersimpan di HP ini. Pilih dan unduh lagi."
+maps.open_list:
+  en: "Choose maps"
+  id: "Pilih peta"
+maps.open:
+  en: "Open"
+  id: "Buka"
+maps.download:
+  en: "Download"
+  id: "Unduh"
+maps.downloading:
+  en: "Downloading…"
+  id: "Mengunduh…"
+maps.remove:
+  en: "Remove"
+  id: "Hapus"
+maps.used:
+  en: "%{n} used"
+  id: "%{n} terpakai"
+maps.loading:
+  en: "Loading…"
+  id: "Memuat…"
+maps.failed:
+  en: "Failed:"
+  id: "Gagal:"
+maps.retry:
+  en: "Try again"
+  id: "Coba lagi"
+maps.credit:
+  en: "Coastlines, borders and places: Natural Earth (public domain)."
+  id: "Garis pantai, batas, dan nama tempat: Natural Earth (domain publik)."

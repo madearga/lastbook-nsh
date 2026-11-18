@@ -233,11 +233,13 @@ import bp229 from "./assets/11c57afd0384b8/p-01.png";
 import bp230 from "./assets/d2213d245d582c/p-01.png";
 import bp231 from "./assets/e02dc81261aae7/p-358.png";
 
+import type { ImageAsset } from "nsh";
+
 export type BatchBook = {
   id: string;
   title: string;
   credit: { en: string; id: string };
-  pages: { src: string; n: number; w: number; h: number }[];
+  pages: { src: string | ImageAsset; n: number; w: number; h: number }[];
 };
 
 export const BATCH_BOOKS: BatchBook[] = [

@@ -1,9 +1,10 @@
+import type { ImageAsset } from "nsh";
 // Registry pembaca: semua dokumen PDF yang halamannya sudah dirender & ikut paket.
 // readers.batch.ts dihasilkan otomatis oleh tools/integrate.py — jangan edit tangan.
 import { BOOKLET_H, BOOKLET_ID, BOOKLET_TITLE, BOOKLET_W, PAGES } from "./reader";
 import { BATCH_BOOKS } from "./readers.batch";
 
-export type BookPage = { src: string; n: number; w: number; h: number };
+export type BookPage = { src: string | ImageAsset; n: number; w: number; h: number };
 export type Book = {
   id: string;
   title: string;

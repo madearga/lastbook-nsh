@@ -167,3 +167,12 @@ test("reader handles sparse pages by real page number", async () => {
   await app.press("‹ Kembali");
   await app.waitFor(HAPPENING);
 });
+
+test("maps screen opens from home and closes back", async () => {
+  const app = await openApp();
+  await app.waitFor(WATER);
+  await app.press("Pilih peta");
+  await app.waitFor("Peta offline");
+  await app.press("‹ Kembali");
+  await app.waitFor(WATER);
+});
