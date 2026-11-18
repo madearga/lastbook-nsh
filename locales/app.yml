@@ -1,0 +1,290 @@
+# Lastbook UI translations (konten topik tetap Inggris).
+_version: 2
+
+app.tag:
+  en: "Survival library · offline & private"
+  id: "Perpustakaan bertahan hidup · luring & privat"
+
+search.ph:
+  en: "Search: water, bleeding, earthquake…"
+  id: "Cari: air, luka, gempa, bleeding…"
+
+search.a11y:
+  en: "Search topics"
+  id: "Cari topik"
+
+search.clear.a11y:
+  en: "Clear search"
+  id: "Kosongkan pencarian"
+
+search.clear:
+  en: "Clear"
+  id: "Hapus"
+
+search.matching:
+  en: "%{n} topics match"
+  id: "%{n} topik cocok"
+
+search.all_offline:
+  en: "%{n} topics · all available offline"
+  id: "%{n} topik · semua tersedia tanpa internet"
+
+home.recent:
+  en: "Recently opened"
+  id: "Terakhir dibuka"
+
+home.match:
+  en: "Match:"
+  id: "Cocok:"
+
+home.group_now:
+  en: "Act now"
+  id: "Darurat sekarang"
+
+home.group_now_note:
+  en: "Happening now"
+  id: "Sedang terjadi"
+
+home.group_learn:
+  en: "Learn & prepare"
+  id: "Belajar & bersiap"
+
+home.group_learn_note:
+  en: "Long term"
+  id: "Jangka panjang"
+
+home.no_results:
+  en: "No topics for “%{q}”"
+  id: "Tidak ada topik untuk “%{q}”"
+
+home.no_results_hint:
+  en: "Try a more common word, in Indonesian or English. For example:"
+  id: "Coba kata yang lebih umum, dalam bahasa Indonesia atau Inggris. Misalnya:"
+
+home.clear_search:
+  en: "Clear search"
+  id: "Hapus pencarian"
+
+updates.title:
+  en: "Updates"
+  id: "Pembaruan"
+
+updates.pkg_running:
+  en: " · package %{v} running"
+  id: " · paket %{v} berjalan"
+
+updates.checking:
+  en: "Checking…"
+  id: "Memeriksa…"
+
+updates.check:
+  en: "Check for updates"
+  id: "Periksa pembaruan"
+
+updates.up_to_date:
+  en: "Up to date (shell v%{v})"
+  id: "Sudah terbaru (shell v%{v})"
+
+updates.available:
+  en: "Version %{v} available. Downloading…"
+  id: "Versi %{v} tersedia. Mengunduh…"
+
+updates.ready:
+  en: "Package ready. Force-close the app, then reopen."
+  id: "Paket siap. Tutup paksa aplikasi, lalu buka lagi."
+
+updates.failed:
+  en: "Failed:"
+  id: "Gagal:"
+
+lang.title:
+  en: "Language"
+  id: "Bahasa"
+
+lang.a11y:
+  en: "Switch language"
+  id: "Ganti bahasa"
+
+footer:
+  en: "The “Food and Water in an Emergency” PDF (FEMA 477) is readable now. Map & more docs coming."
+  id: "PDF “Food and Water in an Emergency” (FEMA 477) bisa dibuka. Peta & dokumen lain menyusul."
+
+read.open_page:
+  en: "Open p. %{n}"
+  id: "Buka hal. %{n}"
+
+read.page:
+  en: "p. %{n}"
+  id: "Hal. %{n}"
+
+read.count:
+  en: "%{n} readings"
+  id: "%{n} bacaan"
+
+detail.all_topics:
+  en: "‹ All topics"
+  id: "‹ Semua topik"
+
+detail.large_text:
+  en: "Large text"
+  id: "Teks besar"
+
+detail.badge_now:
+  en: "EMERGENCY"
+  id: "DARURAT"
+
+detail.badge_later:
+  en: "LONG TERM"
+  id: "JANGKA PANJANG"
+
+section.go:
+  en: "Go to %{s}"
+  id: "Ke bagian %{s}"
+
+section.choices_nav:
+  en: "Situations"
+  id: "Situasi"
+
+section.limits_nav:
+  en: "Limits"
+  id: "Batas"
+
+section.prepare_nav:
+  en: "Prepare"
+  id: "Siapkan"
+
+section.learn_nav:
+  en: "Learn"
+  id: "Pelajari"
+
+section.choices:
+  en: "What's happening?"
+  id: "Apa yang terjadi?"
+
+section.choices_note:
+  en: "Pick the one closest to your situation"
+  id: "Pilih yang paling mirip dengan situasi Anda"
+
+section.limits:
+  en: "Limits"
+  id: "Batas"
+
+section.limits_note:
+  en: "Limits & risks — read before acting"
+  id: "Batas & risiko — baca sebelum bertindak"
+
+section.prepare:
+  en: "Prepare"
+  id: "Siapkan"
+
+section.prepare_note:
+  en: "Prepare before you need it"
+  id: "Siapkan sebelum dibutuhkan"
+
+section.learn:
+  en: "Learn"
+  id: "Pelajari"
+
+section.learn_note:
+  en: "Further reading to go deeper"
+  id: "Bacaan lanjutan untuk dipahami lebih dalam"
+
+limits.show_less:
+  en: "Show less"
+  id: "Tampilkan lebih sedikit"
+
+limits.show_all:
+  en: "Show all (%{n})"
+  id: "Tampilkan semua (%{n})"
+
+empty.topic:
+  en: "Nothing here yet for this topic"
+  id: "Belum ada isi untuk topik ini"
+
+empty.topic_hint:
+  en: "Try another topic from the list."
+  id: "Coba topik lain dari daftar."
+
+detail.next_topic:
+  en: "Next topic"
+  id: "Topik berikutnya"
+
+detail.to_top:
+  en: "↑ Back to top"
+  id: "↑ Kembali ke atas"
+
+reader.back:
+  en: "‹ Back"
+  id: "‹ Kembali"
+
+reader.source:
+  en: "FEMA 477 · American Red Cross (2004) · public domain"
+  id: "FEMA 477 · American Red Cross (2004) · domain publik"
+
+reader.page_of:
+  en: "%{n} / %{total}"
+  id: "%{n} / %{total}"
+
+reader.prev:
+  en: "‹ Prev"
+  id: "‹ Sebelumnya"
+
+reader.next:
+  en: "Next ›"
+  id: "Berikutnya ›"
+
+topic.comms:
+  en: "Comms & navigation"
+  id: "Komunikasi & arah"
+
+topic.disaster:
+  en: "Disaster survival"
+  id: "Bencana alam"
+
+topic.energy:
+  en: "Energy"
+  id: "Energi"
+
+topic.food:
+  en: "Food safety"
+  id: "Makanan"
+
+topic.grow:
+  en: "Gardening"
+  id: "Bercocok tanam"
+
+topic.health:
+  en: "Health"
+  id: "Kesehatan"
+
+topic.hurt:
+  en: "Injuries & illness"
+  id: "Cedera & sakit"
+
+topic.land:
+  en: "Land & resources"
+  id: "Lahan & sumber daya"
+
+topic.power:
+  en: "Power outage"
+  id: "Listrik padam"
+
+topic.preserve:
+  en: "Food preservation"
+  id: "Pengawetan"
+
+topic.repair:
+  en: "Repair & build"
+  id: "Perbaikan"
+
+topic.sanitation:
+  en: "Sanitation"
+  id: "Sanitasi"
+
+topic.shelter:
+  en: "Shelter"
+  id: "Tempat berlindung"
+
+topic.water:
+  en: "Drinking water"
+  id: "Air minum"

@@ -1,20 +1,24 @@
 import { expect, open, test } from "nsh/test";
 
+const ID = { storage: { "lastbook.prefs": '{"lang":"id"}' } };
+const openApp = () => open("./App.tsx", ID);
+
 const WATER = "Get safe drinking water";
 const SEARCH = "label:Cari topik";
+const HAPPENING = "Apa yang terjadi?";
 
 test("lists topics, opens one, goes back", async () => {
-  const app = await open("./App.tsx");
+  const app = await openApp();
   await app.waitFor(WATER);
   await app.press(WATER);
-  await app.waitFor("What's happening?");
-  expect(app.texts()).toContain("Limits");
+  await app.waitFor(HAPPENING);
+  expect(app.texts()).toContain("Batas");
   await app.press("‹ Semua topik");
   await app.waitFor(WATER);
 });
 
 test("home groups topics by urgency", async () => {
-  const app = await open("./App.tsx");
+  const app = await openApp();
   await app.waitFor(WATER);
   expect(app.texts()).toContain("DARURAT SEKARANG");
   expect(app.texts()).toContain("BELAJAR & BERSIAP");
@@ -22,7 +26,7 @@ test("home groups topics by urgency", async () => {
 });
 
 test("search finds topics by Indonesian keyword", async () => {
-  const app = await open("./App.tsx");
+  const app = await openApp();
   await app.waitFor(WATER);
   await app.type(SEARCH, "gempa");
   await app.waitFor("Stay safe in an earthquake, storm, fire, flood or tsunami");
@@ -35,7 +39,7 @@ test("search finds topics by Indonesian keyword", async () => {
 });
 
 test("search with no match shows an empty state that recovers", async () => {
-  const app = await open("./App.tsx");
+  const app = await openApp();
   await app.waitFor(WATER);
   await app.type(SEARCH, "zzqx");
   await app.waitFor("Tidak ada topik untuk “zzqx”");
@@ -52,7 +56,7 @@ test("search with no match shows an empty state that recovers", async () => {
 });
 
 test("a match inside a situation opens the topic with that situation expanded", async () => {
-  const app = await open("./App.tsx");
+  const app = await openApp();
   await app.waitFor(WATER);
   await app.type(SEARCH, "tourniquet");
   await app.waitFor("Cocok: Bleeding, a cut or a wound");
@@ -61,10 +65,10 @@ test("a match inside a situation opens the topic with that situation expanded", 
 });
 
 test("situation cards expand and collapse their readings", async () => {
-  const app = await open("./App.tsx");
+  const app = await openApp();
   await app.waitFor(WATER);
   await app.press(WATER);
-  await app.waitFor("What's happening?");
+  await app.waitFor(HAPPENING);
   expect(app.shows("How long to boil water, and how to fix the taste")).toBe(false);
   await app.press("I can boil water");
   await app.waitFor("How long to boil water, and how to fix the taste");
@@ -77,15 +81,15 @@ test("situation cards expand and collapse their readings", async () => {
 });
 
 test("detail: section chips, long limits, text size and next topic", async () => {
-  const app = await open("./App.tsx");
+  const app = await openApp();
   await app.waitFor(WATER);
   await app.press(WATER);
-  await app.waitFor("What's happening?");
+  await app.waitFor(HAPPENING);
   for (const nav of ["Situasi", "Batas", "Siapkan", "Pelajari"]) {
     expect(app.shows(`label:Ke bagian ${nav}`)).toBe(true);
   }
   await app.press("label:Ke bagian Batas");
-  await app.press("What's happening?");
+  await app.press(HAPPENING);
 
   // Long limit lists show a preview and expand on demand.
   await app.press("Tampilkan semua (11)");
@@ -107,13 +111,42 @@ test("detail: section chips, long limits, text size and next topic", async () =>
 });
 
 test("recently opened topics are one press away", async () => {
-  const app = await open("./App.tsx");
+  const app = await openApp();
   await app.waitFor(WATER);
   expect(app.shows("TERAKHIR DIBUKA")).toBe(false);
   await app.press(WATER);
-  await app.waitFor("What's happening?");
+  await app.waitFor(HAPPENING);
   await app.press("‹ Semua topik");
   await app.waitFor("TERAKHIR DIBUKA");
   await app.press("role:button[/Air minum/]");
-  await app.waitFor("What's happening?");
+  await app.waitFor(HAPPENING);
+});
+
+test("language switch updates the whole UI and survives storage", async () => {
+  const app = await openApp();
+  await app.waitFor("14 topik · semua tersedia tanpa internet");
+  await app.press("English");
+  await app.waitFor("14 topics · all available offline");
+  expect(app.shows("Periksa pembaruan")).toBe(false);
+  await app.press("Indonesia");
+  await app.waitFor("14 topik · semua tersedia tanpa internet");
+  expect(JSON.parse(app.storage()["lastbook.prefs"]).lang).toBe("id");
+});
+
+test("reader opens FEMA 477 at the cited page and navigates", async () => {
+  const app = await openApp();
+  await app.waitFor(WATER);
+  await app.press(WATER);
+  await app.waitFor(HAPPENING);
+  await app.press("I can boil water");
+  await app.waitFor("Buka hal. 13");
+  await app.press("Buka hal. 13");
+  await app.waitFor("13 / 16");
+  await app.press("Berikutnya ›");
+  await app.waitFor("14 / 16");
+  await app.press("‹ Sebelumnya");
+  await app.waitFor("13 / 16");
+  await app.press("‹ Kembali");
+  await app.waitFor(HAPPENING);
+  expect(app.shows("13 / 16")).toBe(false);
 });

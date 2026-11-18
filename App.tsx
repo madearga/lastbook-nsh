@@ -1,11 +1,13 @@
-import { batch, computed, createMotion, effect, mount, reduceMotion, Scroll, signal, Storage, Text, View } from "nsh";
+import { batch, computed, createMotion, effect, Image, mount, reduceMotion, Scroll, signal, Storage, Text, View, windowSize } from "nsh";
 import type { ScrollRef } from "nsh";
+import { t as ti, setLocale } from "nsh/i18n";
 import { Collapsible, Input } from "nsh/base";
 import { BackHandler, Haptics } from "nsh/mobile";
 import { checkForPackage, downloadPackage, runningPackage, shellInfo } from "nsh/updater";
 import { TOPICS, type Choice, type ReadItem, type Topic } from "./topics";
+import { BOOKLET_H, BOOKLET_ID, BOOKLET_TITLE, BOOKLET_W, PAGES } from "./reader";
 
-// Lastbook mobile — UI v0.4: pencarian topik (kata kunci Indonesia & Inggris),
+// Lastbook mobile — UI v0.5: dua bahasa (nsh/i18n, locales/app.yml), pembaca PDF
 // navigasi bagian, kartu situasi yang membuka dengan pegas, ukuran teks baca,
 // riwayat "terakhir dibuka" (Storage), tombol kembali Android. Semua warna dari
 // token tema (theme.json, terang & gelap). Konten topik tetap bahasa Inggris.
@@ -30,23 +32,28 @@ const TONE: Record<Tone, { bar: string; tile: string; text: string }> = {
 type Meta = { icon: string; tone: Tone; name: string; keys: string };
 
 const META: Record<string, Meta> = {
-  comms: { icon: "📡", tone: "blue", name: "Komunikasi & arah", keys: "komunikasi radio telepon hp sinyal internet keluarga kabar peta kompas arah navigasi tersesat" },
-  disaster: { icon: "🚨", tone: "red", name: "Bencana alam", keys: "bencana gempa badai kebakaran api banjir tsunami angin topan puting beliung asap evakuasi petir" },
-  energy: { icon: "🔋", tone: "amber", name: "Energi", keys: "energi listrik surya matahari baterai aki generator panel" },
-  food: { icon: "🍲", tone: "green", name: "Makanan", keys: "makanan makan masak memasak kulkas basi lapar" },
-  grow: { icon: "🌱", tone: "green", name: "Bercocok tanam", keys: "tanam menanam kebun bibit benih pangan tani pertanian sayur hama" },
-  health: { icon: "🩺", tone: "violet", name: "Kesehatan", keys: "kesehatan obat penyakit kronis dokter sakit" },
-  hurt: { icon: "🩹", tone: "red", name: "Cedera & sakit", keys: "luka cedera sakit darurat pertolongan pertama p3k darah berdarah patah pingsan demam syok" },
-  land: { icon: "🗺️", tone: "teal", name: "Lahan & sumber daya", keys: "lahan tanah sumber alam lokasi kayu hutan" },
-  power: { icon: "💡", tone: "amber", name: "Listrik padam", keys: "listrik padam mati lampu senter penerangan cas baterai hp" },
-  preserve: { icon: "🥫", tone: "green", name: "Pengawetan", keys: "awet awetkan pengawetan simpan penyimpanan makanan kaleng kering asin" },
-  repair: { icon: "🔧", tone: "slate", name: "Perbaikan", keys: "perbaiki perbaikan bangun alat rumah tukang" },
-  sanitation: { icon: "🧼", tone: "teal", name: "Sanitasi", keys: "toilet jamban sanitasi kebersihan sampah limbah cuci tangan sabun" },
-  shelter: { icon: "🏠", tone: "brown", name: "Tempat berlindung", keys: "tempat tinggal berlindung berteduh hangat dingin panas tenda rumah selimut" },
-  water: { icon: "💧", tone: "blue", name: "Air minum", keys: "air minum bersih rebus saring sumur hujan haus" },
+  comms: { icon: "📡", tone: "blue", name: { id: "Komunikasi & arah", en: "Comms & navigation" }, keys: "komunikasi radio telepon hp sinyal internet keluarga kabar peta kompas arah navigasi tersesat" },
+  disaster: { icon: "🚨", tone: "red", name: { id: "Bencana alam", en: "Disaster survival" }, keys: "bencana gempa badai kebakaran api banjir tsunami angin topan puting beliung asap evakuasi petir" },
+  energy: { icon: "🔋", tone: "amber", name: { id: "Energi", en: "Energy" }, keys: "energi listrik surya matahari baterai aki generator panel" },
+  food: { icon: "🍲", tone: "green", name: { id: "Makanan", en: "Food safety" }, keys: "makanan makan masak memasak kulkas basi lapar" },
+  grow: { icon: "🌱", tone: "green", name: { id: "Bercocok tanam", en: "Gardening" }, keys: "tanam menanam kebun bibit benih pangan tani pertanian sayur hama" },
+  health: { icon: "🩺", tone: "violet", name: { id: "Kesehatan", en: "Health" }, keys: "kesehatan obat penyakit kronis dokter sakit" },
+  hurt: { icon: "🩹", tone: "red", name: { id: "Cedera & sakit", en: "Injuries & illness" }, keys: "luka cedera sakit darurat pertolongan pertama p3k darah berdarah patah pingsan demam syok" },
+  land: { icon: "🗺️", tone: "teal", name: { id: "Lahan & sumber daya", en: "Land & resources" }, keys: "lahan tanah sumber alam lokasi kayu hutan" },
+  power: { icon: "💡", tone: "amber", name: { id: "Listrik padam", en: "Power outage" }, keys: "listrik padam mati lampu senter penerangan cas baterai hp" },
+  preserve: { icon: "🥫", tone: "green", name: { id: "Pengawetan", en: "Food preservation" }, keys: "awet awetkan pengawetan simpan penyimpanan makanan kaleng kering asin" },
+  repair: { icon: "🔧", tone: "slate", name: { id: "Perbaikan", en: "Repair & build" }, keys: "perbaiki perbaikan bangun alat rumah tukang" },
+  sanitation: { icon: "🧼", tone: "teal", name: { id: "Sanitasi", en: "Sanitation" }, keys: "toilet jamban sanitasi kebersihan sampah limbah cuci tangan sabun" },
+  shelter: { icon: "🏠", tone: "brown", name: { id: "Tempat berlindung", en: "Shelter" }, keys: "tempat tinggal berlindung berteduh hangat dingin panas tenda rumah selimut" },
+  water: { icon: "💧", tone: "blue", name: { id: "Air minum", en: "Drinking water" }, keys: "air minum bersih rebus saring sumur hujan haus" },
 };
-const FALLBACK: Meta = { icon: "📖", tone: "slate", name: "Topik", keys: "" };
+const FALLBACK: Meta = { icon: "📖", tone: "slate", name: { id: "Topik", en: "Topic" }, keys: "" };
 const meta = (id: string): Meta => META[id] ?? FALLBACK;
+const mname = (m: Meta) => m.name[langPref()] ?? m.name.id;
+
+// Pembaca PDF: dokumen harus ini dan halamannya sudah dirender.
+const canRead = (item: ReadItem) =>
+  item.doc === BOOKLET_ID && typeof item.page === "number" && item.page >= 1 && item.page <= PAGES.length;
 
 const SUGGESTIONS = ["air", "luka", "gempa", "listrik", "makanan"];
 const PREFS_KEY = "lastbook.prefs";
@@ -93,6 +100,8 @@ function search(query: string): Result[] {
 
 const SHELL = shellInfo();
 const PKG = runningPackage();
+// Pilihan bahasa pengguna ("id" | "en" | null = ikut perangkat) — sinkron dengan nsh/i18n setLocale.
+const langPref = signal<"id" | "en" | null>(null);
 
 function App() {
   const selected = signal<string | null>(null);
@@ -103,11 +112,16 @@ function App() {
   const loaded = signal(false);
   const upd = signal<"idle" | "busy" | "ready" | "error">("idle");
   const updMsg = signal<string>("");
+  const reader = signal<number | null>(null);
 
   // Preferensi di perangkat: ukuran teks & riwayat. Ditulis hanya setelah dibaca.
   Storage.getItem(PREFS_KEY)
     .then((raw) => {
       const p = JSON.parse(raw ?? "{}");
+      if (p.lang === "id" || p.lang === "en") {
+        langPref.set(p.lang);
+        setLocale(p.lang);
+      }
       if (typeof p.large === "boolean") large.set(p.large);
       if (Array.isArray(p.recent)) {
         recent.set(p.recent.filter((id: unknown) => typeof id === "string" && id in META).slice(0, 3));
@@ -116,7 +130,7 @@ function App() {
     .catch(() => {})
     .finally(() => loaded.set(true));
   effect(() => {
-    const prefs = JSON.stringify({ large: large(), recent: recent() });
+    const prefs = JSON.stringify({ lang: langPref(), large: large(), recent: recent() });
     if (loaded()) Storage.setItem(PREFS_KEY, prefs).catch(() => {});
   });
 
@@ -135,6 +149,10 @@ function App() {
   }
   // Android: tombol/gestur kembali menutup topik dulu, baru keluar aplikasi.
   BackHandler.on("press", () => {
+    if (reader() != null) {
+      reader.set(null);
+      return true;
+    }
     if (!selected()) return false;
     goHome();
     return true;
@@ -144,20 +162,20 @@ function App() {
     if (upd() === "busy") return;
     try {
       upd.set("busy");
-      updMsg.set("Memeriksa…");
+      updMsg.set(ti("updates.checking"));
       const pkg = await checkForPackage();
       if (!pkg) {
         upd.set("idle");
-        updMsg.set(`Sudah terbaru (shell v${SHELL?.version ?? "—"})`);
+        updMsg.set(ti("updates.up_to_date", { v: SHELL?.version ?? "—" }));
         return;
       }
-      updMsg.set(`Versi ${pkg.version} tersedia. Mengunduh…`);
+      updMsg.set(ti("updates.available", { v: pkg.version }));
       await downloadPackage();
       upd.set("ready");
-      updMsg.set("Paket siap. Tutup paksa aplikasi, lalu buka lagi.");
+      updMsg.set(ti("updates.ready"));
     } catch (e) {
       upd.set("error");
-      updMsg.set(`Gagal: ${String(e)}`);
+      updMsg.set(`${ti("updates.failed")} ${String(e)}`);
     }
   }
 
@@ -185,13 +203,13 @@ function App() {
           <Text class="text-[22px]">{m().icon}</Text>
         </View>
         <View class="flex-1 gap-1">
-          <Text class={`text-[11px] font-bold uppercase tracking-wider ${tone().text}`}>{m().name}</Text>
+          <Text class={`text-[11px] font-bold uppercase tracking-wider ${tone().text}`}>{mname(m())}</Text>
           <Text class="text-[16px] leading-[21px] font-bold text-foreground">{props.r.t.title}</Text>
           {props.r.t.short ? (
             <Text class="text-[13px] leading-[18px] text-muted-foreground line-clamp-2">{props.r.t.short}</Text>
           ) : null}
           {props.r.via ? (
-            <Text class="text-[13px] leading-[18px] font-semibold text-primary">{`Cocok: ${props.r.via.label}`}</Text>
+            <Text class="text-[13px] leading-[18px] font-semibold text-primary">{`${ti("home.match")} ${props.r.via.label}`}</Text>
           ) : null}
         </View>
         <Text class="text-2xl text-muted-foreground/60">›</Text>
@@ -216,9 +234,9 @@ function App() {
   const EmptyResults = () => (
     <View class="items-center gap-3 py-10 px-4 bg-card rounded-(--radius-card) border border-dashed border-input">
       <Text class="text-4xl">🧭</Text>
-      <Text class="text-[17px] font-bold text-foreground text-center">{`Tidak ada topik untuk “${query().trim()}”`}</Text>
+      <Text class="text-[17px] font-bold text-foreground text-center">{ti("home.no_results", { q: query().trim() })}</Text>
       <Text class="text-[14px] leading-[21px] text-muted-foreground text-center">
-        Coba kata yang lebih umum, dalam bahasa Indonesia atau Inggris. Misalnya:
+        {ti("home.no_results_hint")}
       </Text>
       <View class="flex-row flex-wrap justify-center gap-2">
         <Each of={SUGGESTIONS}>
@@ -238,7 +256,7 @@ function App() {
         onPress={() => query.set("")}
         class="mt-1 h-10 px-4 rounded-(--radius) bg-primary items-center justify-center transition-transform duration-150 ease-out active:scale-[0.97]"
       >
-        <Text class="text-sm font-semibold text-primary-foreground">Hapus pencarian</Text>
+        <Text class="text-sm font-semibold text-primary-foreground">{ti("home.clear_search")}</Text>
       </View>
     </View>
   );
@@ -252,7 +270,7 @@ function App() {
           </View>
           <View class="flex-1 gap-0.5">
             <Text class="text-[28px] leading-[34px] font-bold tracking-tight text-foreground">Lastbook</Text>
-            <Text class="text-[13px] text-muted-foreground">Perpustakaan bertahan hidup · luring & privat</Text>
+            <Text class="text-[13px] text-muted-foreground">{ti("app.tag")}</Text>
           </View>
         </View>
 
@@ -263,8 +281,8 @@ function App() {
               class="flex-1 h-12 text-[16px] text-foreground placeholder:text-muted-foreground caret-primary"
               value={query()}
               onChange={(e) => query.set(e.value)}
-              placeholder="Cari: air, luka, gempa, bleeding…"
-              accessibilityLabel="Cari topik"
+              placeholder={ti("search.ph")}
+              accessibilityLabel={ti("search.a11y")}
               returnKeyType="search"
               autoCapitalize="none"
               autoCorrect={false}
@@ -272,22 +290,22 @@ function App() {
             <If when={query().length > 0}>
               <View
                 role="button"
-                accessibilityLabel="Kosongkan pencarian"
+                accessibilityLabel={ti("search.clear.a11y")}
                 onPress={() => query.set("")}
                 class="h-9 px-3 rounded-(--radius) bg-muted items-center justify-center transition-opacity duration-150 active:opacity-60"
               >
-                <Text class="text-[13px] font-semibold text-muted-foreground">Hapus</Text>
+                <Text class="text-[13px] font-semibold text-muted-foreground">{ti("search.clear")}</Text>
               </View>
             </If>
           </View>
           <Text class="text-[13px] text-muted-foreground px-1">
-            {searching() ? `${results().length} topik cocok` : `${TOPICS.length} topik · semua tersedia tanpa internet`}
+            {searching() ? ti("search.matching", { n: results().length }) : ti("search.all_offline", { n: TOPICS.length })}
           </Text>
         </View>
 
         <If when={!searching() && recent().length > 0}>
           <View class="gap-2">
-            <Text class="text-[13px] font-bold uppercase tracking-wider text-foreground">Terakhir dibuka</Text>
+            <Text class="text-[13px] font-bold uppercase tracking-wider text-foreground">{ti("home.recent")}</Text>
             <View class="flex-row flex-wrap gap-2">
               <Each of={recent()}>
                 {(id) => (
@@ -297,7 +315,7 @@ function App() {
                     class="flex-row items-center gap-1.5 h-10 px-3.5 rounded-(--radius-pill) bg-card border border-border transition duration-150 ease-out active:scale-[0.97] active:bg-accent"
                   >
                     <Text class="text-[15px]">{meta(id()).icon}</Text>
-                    <Text class="text-sm font-semibold text-foreground">{meta(id()).name}</Text>
+                    <Text class="text-sm font-semibold text-foreground">{mname(meta(id()))}</Text>
                   </View>
                 )}
               </Each>
@@ -306,15 +324,15 @@ function App() {
         </If>
 
         <If when={results().length > 0} else={<EmptyResults />}>
-          <Group title="Darurat sekarang" note="Sedang terjadi" items={results().filter((r) => r.t.mode === "now")} />
-          <Group title="Belajar & bersiap" note="Jangka panjang" items={results().filter((r) => r.t.mode !== "now")} />
+          <Group title={ti("home.group_now")} note={ti("home.group_now_note")} items={results().filter((r) => r.t.mode === "now")} />
+          <Group title={ti("home.group_learn")} note={ti("home.group_learn_note")} items={results().filter((r) => r.t.mode !== "now")} />
         </If>
 
         <View class="gap-2 pt-2">
-          <Text class="text-[13px] font-bold uppercase tracking-wider text-foreground">Pembaruan</Text>
+          <Text class="text-[13px] font-bold uppercase tracking-wider text-foreground">{ti("updates.title")}</Text>
           <View class="bg-card rounded-(--radius-card) border border-border p-4 gap-2.5">
             <Text class="text-[13px] text-muted-foreground">
-              {`Shell v${SHELL?.version ?? "—"}${PKG ? ` · paket ${PKG.version} berjalan` : ""}`}
+              {`Shell v${SHELL?.version ?? "—"}${PKG ? ti("updates.pkg_running", { v: PKG.version }) : ""}`}
             </Text>
             <View
               role="button"
@@ -323,7 +341,7 @@ function App() {
               class="self-start h-10 px-4 rounded-(--radius) bg-primary items-center justify-center transition-transform duration-150 ease-out active:scale-[0.97] disabled:opacity-60"
             >
               <Text class="text-sm font-semibold text-primary-foreground">
-                {upd() === "busy" ? "Memeriksa…" : "Periksa pembaruan"}
+                {upd() === "busy" ? ti("updates.checking") : ti("updates.check")}
               </Text>
             </View>
             {updMsg() ? (
@@ -332,8 +350,16 @@ function App() {
           </View>
         </View>
 
+        <View class="gap-2">
+          <Text class="text-[13px] font-bold uppercase tracking-wider text-foreground">{ti("lang.title")}</Text>
+          <View class="flex-row gap-2">
+            <LangButton l="id" label="Indonesia" />
+            <LangButton l="en" label="English" />
+          </View>
+        </View>
+
         <Text class="text-xs leading-[18px] text-muted-foreground/80 text-center px-4">
-          Data topik asli dari lastbook (MIT). Pembacaan PDF & peta menyusul.
+          {ti("footer")}
         </Text>
       </View>
     </Scroll>
@@ -355,9 +381,23 @@ function App() {
         <Text class={`font-semibold text-foreground ${bodyText()}`}>{props.item.label}</Text>
         {props.item.note ? <Text class={`text-muted-foreground ${smallText()}`}>{props.item.note}</Text> : null}
         {props.item.page ? (
-          <View class="self-start mt-1 px-2 py-0.5 rounded-(--radius-pill) bg-secondary border border-border">
-            <Text class="text-xs font-semibold text-muted-foreground">{`Hal. ${props.item.page}`}</Text>
-          </View>
+          canRead(props.item) ? (
+            <View
+              role="button"
+              accessibilityLabel={ti("read.open_page", { n: props.item.page ?? 0 })}
+              onPress={() => {
+                Haptics.selection();
+                reader.set(props.item.page ?? 1);
+              }}
+              class="self-start mt-1 px-2.5 py-1 rounded-(--radius-pill) bg-primary/15 border border-primary/40 transition duration-150 ease-out active:scale-[0.97]"
+            >
+              <Text class="text-xs font-bold text-primary">{ti("read.open_page", { n: props.item.page ?? 0 })}</Text>
+            </View>
+          ) : (
+            <View class="self-start mt-1 px-2 py-0.5 rounded-(--radius-pill) bg-secondary border border-border">
+              <Text class="text-xs font-semibold text-muted-foreground">{ti("read.page", { n: props.item.page ?? 0 })}</Text>
+            </View>
+          )
         ) : null}
       </View>
     </View>
@@ -388,11 +428,11 @@ function App() {
     const enter = createMotion({ enter: { duration: 220, easing: EASE_OUT, keyframes: { opacity: [0, 1], translateY: [12, 0] } } });
 
     const sections = [
-      t.choices?.length ? { id: "choices", nav: "Situasi", count: t.choices.length } : null,
-      limits.length ? { id: "limits", nav: "Batas", count: limits.length } : null,
-      t.prepare?.length ? { id: "prepare", nav: "Siapkan", count: t.prepare.length } : null,
-      t.learn?.length ? { id: "learn", nav: "Pelajari", count: t.learn.length } : null,
-    ].filter((s): s is { id: string; nav: string; count: number } => s !== null);
+      t.choices?.length ? { id: "choices", nav: () => ti("section.choices_nav"), count: t.choices.length } : null,
+      limits.length ? { id: "limits", nav: () => ti("section.limits_nav"), count: limits.length } : null,
+      t.prepare?.length ? { id: "prepare", nav: () => ti("section.prepare_nav"), count: t.prepare.length } : null,
+      t.learn?.length ? { id: "learn", nav: () => ti("section.learn_nav"), count: t.learn.length } : null,
+    ].filter((s): s is { id: string; nav: () => string; count: number } => s !== null);
 
     const scrollTo = (y: number) => scroller?.scrollTo({ y: Math.max(0, y), animated: !reduceMotion() });
     const jump = (id: string) => {
@@ -446,7 +486,7 @@ function App() {
             </View>
             <View class="items-center gap-0.5">
               <Text class="text-[22px] text-muted-foreground transition-transform duration-200 ease-out group-aria-expanded:rotate-90">›</Text>
-              <Text class="text-[11px] font-semibold text-muted-foreground">{`${p.c.read.length} bacaan`}</Text>
+              <Text class="text-[11px] font-semibold text-muted-foreground">{ti("read.count", { n: p.c.read.length })}</Text>
             </View>
           </View>
         </Collapsible>
@@ -464,14 +504,14 @@ function App() {
             onPress={goHome}
             class="h-11 px-2 rounded-(--radius) justify-center transition-colors duration-150 active:bg-accent"
           >
-            <Text class="text-[16px] font-semibold text-primary">‹ Semua topik</Text>
+            <Text class="text-[16px] font-semibold text-primary">{ti("detail.all_topics")}</Text>
           </View>
           <View class="flex-1 items-center">
             {scrolled() ? <Text class="text-[15px] font-semibold text-foreground line-clamp-1">{m.name}</Text> : null}
           </View>
           <View
             role="button"
-            accessibilityLabel="Teks besar"
+            accessibilityLabel={ti("detail.large_text")}
             accessibilityState={{ selected: large() }}
             onPress={() => large.update((v) => !v)}
             class={`h-11 min-w-11 px-3 rounded-(--radius) items-center justify-center transition-colors duration-150 active:opacity-70 ${large() ? "bg-primary" : "bg-muted"}`}
@@ -492,10 +532,10 @@ function App() {
                 <View class={`w-10 h-10 rounded-(--radius) items-center justify-center ${tone.tile}`}>
                   <Text class="text-xl">{m.icon}</Text>
                 </View>
-                <Text class={`text-xs font-bold uppercase tracking-wider ${tone.text}`}>{m.name}</Text>
+                <Text class={`text-xs font-bold uppercase tracking-wider ${tone.text}`}>{mname(m)}</Text>
                 <View class={`px-2 py-0.5 rounded-(--radius-pill) ${t.mode === "now" ? "bg-destructive/15" : "bg-primary/15"}`}>
                   <Text class={`text-[11px] font-bold ${t.mode === "now" ? "text-destructive" : "text-primary"}`}>
-                    {t.mode === "now" ? "DARURAT" : "JANGKA PANJANG"}
+                    {t.mode === "now" ? ti("detail.badge_now") : ti("detail.badge_later")}
                   </Text>
                 </View>
               </View>
@@ -509,11 +549,11 @@ function App() {
                   {(s) => (
                     <View
                       role="button"
-                      accessibilityLabel={`Ke bagian ${s().nav}`}
+                      accessibilityLabel={ti("section.go", { s: s().nav() })}
                       onPress={() => jump(s().id)}
                       class="flex-row items-center gap-1.5 h-9 px-3.5 rounded-(--radius-pill) bg-card border border-border transition duration-150 ease-out active:scale-[0.97] active:bg-accent"
                     >
-                      <Text class="text-sm font-semibold text-foreground">{s().nav}</Text>
+                      <Text class="text-sm font-semibold text-foreground">{s().nav()}</Text>
                       <Text class="text-xs font-semibold text-muted-foreground">{String(s().count)}</Text>
                     </View>
                   )}
@@ -523,21 +563,21 @@ function App() {
 
             <If when={sections.length === 0}>
               <View class="items-center gap-2 py-10 bg-card rounded-(--radius-card) border border-dashed border-input">
-                <Text class="text-[16px] font-semibold text-foreground">Belum ada isi untuk topik ini</Text>
-                <Text class="text-[14px] text-muted-foreground">Coba topik lain dari daftar.</Text>
+                <Text class="text-[16px] font-semibold text-foreground">{ti("empty.topic")}</Text>
+                <Text class="text-[14px] text-muted-foreground">{ti("empty.topic_hint")}</Text>
               </View>
             </If>
 
             {t.choices?.length ? (
               <View class="gap-3" onLayout={track("choices")}>
-                <SectionHead id="choices" title="What's happening?" note="Pilih yang paling mirip dengan situasi Anda" />
+                <SectionHead id="choices" title={ti("section.choices")} note={ti("section.choices_note")} />
                 <Each of={t.choices}>{(c) => <ChoiceCard c={c()} />}</Each>
               </View>
             ) : null}
 
             {limits.length ? (
               <View class="gap-3" onLayout={track("limits")}>
-                <SectionHead id="limits" title="Limits" note="Batas & risiko — baca sebelum bertindak" danger />
+                <SectionHead id="limits" title={ti("section.limits")} note={ti("section.limits_note")} danger />
                 <View class="bg-destructive/10 border border-destructive/30 rounded-(--radius-card) px-4 py-3">
                   <Each of={limits.slice(0, LIMIT_PREVIEW)}>{(l) => <LimitRow text={l().text} />}</Each>
                   <If when={limits.length > LIMIT_PREVIEW}>
@@ -557,7 +597,7 @@ function App() {
                       class="self-start mt-2 mb-1 h-9 px-3.5 rounded-(--radius-pill) bg-card border border-destructive/30 justify-center transition duration-150 ease-out active:scale-[0.97] active:opacity-80"
                     >
                       <Text class="text-sm font-semibold text-destructive">
-                        {allLimits() ? "Tampilkan lebih sedikit" : `Tampilkan semua (${limits.length})`}
+                        {allLimits() ? ti("limits.show_less") : ti("limits.show_all", { n: limits.length })}
                       </Text>
                     </View>
                   </If>
@@ -567,7 +607,7 @@ function App() {
 
             {t.prepare?.length ? (
               <View class="gap-3" onLayout={track("prepare")}>
-                <SectionHead id="prepare" title="Prepare" note="Siapkan sebelum dibutuhkan" />
+                <SectionHead id="prepare" title={ti("section.prepare")} note={ti("section.prepare_note")} />
                 <View class="bg-card rounded-(--radius-card) border border-border px-4">
                   <Each of={t.prepare}>{(r, i) => <ReadingRow item={r()} n={i() + 1} />}</Each>
                 </View>
@@ -576,7 +616,7 @@ function App() {
 
             {t.learn?.length ? (
               <View class="gap-3" onLayout={track("learn")}>
-                <SectionHead id="learn" title="Learn" note="Bacaan lanjutan untuk dipahami lebih dalam" />
+                <SectionHead id="learn" title={ti("section.learn")} note={ti("section.learn_note")} />
                 <View class="bg-card rounded-(--radius-card) border border-border px-4">
                   <Each of={t.learn}>{(r) => <ReadingRow item={r()} />}</Each>
                 </View>
@@ -593,8 +633,8 @@ function App() {
                   <Text class="text-xl">{meta(next.id).icon}</Text>
                 </View>
                 <View class="flex-1 gap-0.5">
-                  <Text class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Topik berikutnya</Text>
-                  <Text class="text-[15px] leading-[20px] font-semibold text-foreground">{`${meta(next.id).name} — ${next.title}`}</Text>
+                  <Text class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">{ti("detail.next_topic")}</Text>
+                  <Text class="text-[15px] leading-[20px] font-semibold text-foreground">{`${mname(meta(next.id))} — ${next.title}`}</Text>
                 </View>
                 <Text class="text-2xl text-muted-foreground/60">›</Text>
               </View>
@@ -603,7 +643,7 @@ function App() {
                 onPress={() => scrollTo(0)}
                 class="self-center h-10 px-4 rounded-(--radius) justify-center transition-colors duration-150 active:bg-accent"
               >
-                <Text class="text-sm font-semibold text-primary">↑ Kembali ke atas</Text>
+                <Text class="text-sm font-semibold text-primary">{ti("detail.to_top")}</Text>
               </View>
             </View>
           </View>
@@ -612,8 +652,86 @@ function App() {
     );
   };
 
+  // Tombol bahasa: label selalu nama bahasanya (tidak diterjemahkan).
+  const LangButton = (props: { l: "id" | "en"; label: string }) => (
+    <View
+      role="button"
+      accessibilityLabel={ti("lang.a11y")}
+      onPress={() => {
+        Haptics.selection();
+        langPref.set(props.l);
+        setLocale(props.l);
+      }}
+      class={`h-10 px-4 rounded-(--radius) items-center justify-center border transition duration-150 ease-out active:scale-[0.97] ${langPref() === props.l ? "bg-primary border-primary" : "bg-card border-border"}`}
+    >
+      <Text class={`text-sm font-semibold ${langPref() === props.l ? "text-primary-foreground" : "text-foreground"}`}>{props.label}</Text>
+    </View>
+  );
+
+  // Pembaca PDF: satu halaman FEMA 477, navigasi sebelumnya/berikutnya.
+  const Reader = () => {
+    const page = () => reader() ?? 1;
+    const total = PAGES.length;
+    const w = Math.min(680, windowSize().width - 32);
+    const h = Math.round((w * BOOKLET_H) / BOOKLET_W);
+    const enter = createMotion({ enter: { duration: 220, easing: EASE_OUT, keyframes: { opacity: [0, 1], translateY: [12, 0] } } });
+    const go = (d: number) => {
+      Haptics.selection();
+      reader.update((p) => Math.min(total, Math.max(1, (p ?? 1) + d)));
+    };
+    return (
+      <View class="flex-1 bg-background">
+        <View class="flex-row items-center gap-2 px-3 pb-2 bg-background border-b border-border pt-[calc(env(safe-area-inset-top)+8px)]">
+          <View
+            role="button"
+            onPress={() => reader.set(null)}
+            class="h-11 px-2 rounded-(--radius) justify-center transition-colors duration-150 active:bg-accent"
+          >
+            <Text class="text-[16px] font-semibold text-primary">{ti("reader.back")}</Text>
+          </View>
+          <View class="flex-1 items-center">
+            <Text class="text-[15px] font-semibold text-foreground line-clamp-1">{BOOKLET_TITLE}</Text>
+          </View>
+          <Text class="text-[15px] font-bold text-foreground">{ti("reader.page_of", { n: page(), total })}</Text>
+        </View>
+        <Scroll class="flex-1 bg-muted/40">
+          <View class="items-center px-4 pt-4 pb-10 gap-3" style={enter.style}>
+            <Image
+              src={PAGES[page() - 1]}
+              style={{ width: w, height: h }}
+              class="rounded-(--radius-card) border border-border bg-card"
+            />
+            <Text class="text-[12px] text-muted-foreground">{ti("reader.source")}</Text>
+          </View>
+        </Scroll>
+        <View class="flex-row items-center gap-3 px-4 py-3 pb-[calc(env(safe-area-inset-bottom)+12px)] border-t border-border bg-background">
+          <View
+            role="button"
+            onPress={() => go(-1)}
+            disabled={page() <= 1}
+            class="flex-1 h-11 rounded-(--radius) bg-card border border-border items-center justify-center transition duration-150 ease-out active:scale-[0.97] disabled:opacity-40"
+          >
+            <Text class="text-sm font-semibold text-foreground">{ti("reader.prev")}</Text>
+          </View>
+          <View
+            role="button"
+            onPress={() => go(1)}
+            disabled={page() >= total}
+            class="flex-1 h-11 rounded-(--radius) bg-primary items-center justify-center transition duration-150 ease-out active:scale-[0.97] disabled:opacity-40"
+          >
+            <Text class="text-sm font-semibold text-primary-foreground">{ti("reader.next")}</Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
   // Branch reaktif: signal dibaca DI DALAM ekspresi JSX, bukan di badan komponen.
-  return <View class="flex-1 bg-background">{topic() ? <Detail t={topic()!} /> : <Home />}</View>;
+  return (
+    <View class="flex-1 bg-background">
+      {reader() != null ? <Reader /> : topic() ? <Detail t={topic()!} /> : <Home />}
+    </View>
+  );
 }
 
 mount(App);
