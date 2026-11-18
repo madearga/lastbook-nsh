@@ -141,12 +141,12 @@ test("reader opens FEMA 477 at the cited page and navigates", async () => {
   await app.press("I can boil water");
   await app.waitFor("Buka hal. 13");
   await app.press("Buka hal. 13");
-  await app.waitFor("13 / 16");
+  await app.waitFor("Hal. 13");
   await app.press("Berikutnya ›");
-  await app.waitFor("14 / 16");
+  await app.waitFor("Hal. 14");
   await app.press("‹ Sebelumnya");
-  await app.waitFor("13 / 16");
+  await app.waitFor("Hal. 13");
   await app.press("‹ Kembali");
   await app.waitFor(HAPPENING);
-  expect(app.shows("13 / 16")).toBe(false);
+  expect(app.shows("Hal. 13")).toBe(false);
 });

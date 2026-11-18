@@ -174,7 +174,7 @@ export type BatchBook = {
   id: string;
   title: string;
   credit: { en: string; id: string };
-  pages: { src: string; w: number; h: number }[];
+  pages: { src: string; n: number; w: number; h: number }[];
 };
 
 export const BATCH_BOOKS: BatchBook[] = [
@@ -183,27 +183,27 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "CERT Hazard Annexes (2019)",
     credit: { en: "FEMA CERT Basic Training — Hazard Annexes (2019) · public domain", id: "FEMA CERT Basic Training — Hazard Annexes (2019) · domain publik" },
     pages: [
-    { src: bp000, w: 800, h: 1650 },  // hal. 13
-    { src: bp001, w: 800, h: 1650 },  // hal. 16
-    { src: bp002, w: 800, h: 1650 },  // hal. 17
-    { src: bp003, w: 900, h: 1650 },  // hal. 18
-    { src: bp004, w: 800, h: 1650 },  // hal. 25
-    { src: bp005, w: 800, h: 1650 },  // hal. 26
-    { src: bp006, w: 800, h: 1650 },  // hal. 35
-    { src: bp007, w: 800, h: 1650 },  // hal. 36
-    { src: bp008, w: 800, h: 1650 },  // hal. 58
-    { src: bp009, w: 800, h: 1650 },  // hal. 59
-    { src: bp010, w: 800, h: 1650 },  // hal. 60
-    { src: bp011, w: 800, h: 1650 },  // hal. 75
-    { src: bp012, w: 800, h: 1702 },  // hal. 84
-    { src: bp013, w: 800, h: 1702 },  // hal. 85
-    { src: bp014, w: 800, h: 1702 },  // hal. 91
-    { src: bp015, w: 800, h: 1702 },  // hal. 92
-    { src: bp016, w: 800, h: 1702 },  // hal. 97
-    { src: bp017, w: 800, h: 1702 },  // hal. 98
-    { src: bp018, w: 800, h: 1702 },  // hal. 99
-    { src: bp019, w: 800, h: 1702 },  // hal. 100
-    { src: bp020, w: 800, h: 1702 },  // hal. 121
+    { src: bp000, n: 13, w: 800, h: 1650 },
+    { src: bp001, n: 16, w: 800, h: 1650 },
+    { src: bp002, n: 17, w: 800, h: 1650 },
+    { src: bp003, n: 18, w: 900, h: 1650 },
+    { src: bp004, n: 25, w: 800, h: 1650 },
+    { src: bp005, n: 26, w: 800, h: 1650 },
+    { src: bp006, n: 35, w: 800, h: 1650 },
+    { src: bp007, n: 36, w: 800, h: 1650 },
+    { src: bp008, n: 58, w: 800, h: 1650 },
+    { src: bp009, n: 59, w: 800, h: 1650 },
+    { src: bp010, n: 60, w: 800, h: 1650 },
+    { src: bp011, n: 75, w: 800, h: 1650 },
+    { src: bp012, n: 84, w: 800, h: 1702 },
+    { src: bp013, n: 85, w: 800, h: 1702 },
+    { src: bp014, n: 91, w: 800, h: 1702 },
+    { src: bp015, n: 92, w: 800, h: 1702 },
+    { src: bp016, n: 97, w: 800, h: 1702 },
+    { src: bp017, n: 98, w: 800, h: 1702 },
+    { src: bp018, n: 99, w: 800, h: 1702 },
+    { src: bp019, n: 100, w: 800, h: 1702 },
+    { src: bp020, n: 121, w: 800, h: 1702 },
     ],
   },
   {
@@ -211,20 +211,20 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Earthquake Safety at Home (2020)",
     credit: { en: "FEMA P-530 Earthquake Safety at Home (2020) · public domain", id: "FEMA P-530 Earthquake Safety at Home (2020) · domain publik" },
     pages: [
-    { src: bp021, w: 800, h: 1650 },  // hal. 16
-    { src: bp022, w: 800, h: 1650 },  // hal. 23
-    { src: bp023, w: 800, h: 1650 },  // hal. 25
-    { src: bp024, w: 800, h: 1650 },  // hal. 26
-    { src: bp025, w: 900, h: 1650 },  // hal. 29
-    { src: bp026, w: 800, h: 1650 },  // hal. 32
-    { src: bp027, w: 800, h: 1650 },  // hal. 56
-    { src: bp028, w: 800, h: 1650 },  // hal. 60
-    { src: bp029, w: 900, h: 1650 },  // hal. 66
-    { src: bp030, w: 800, h: 1650 },  // hal. 68
-    { src: bp031, w: 900, h: 1650 },  // hal. 71
-    { src: bp032, w: 900, h: 1650 },  // hal. 74
-    { src: bp033, w: 900, h: 1650 },  // hal. 75
-    { src: bp034, w: 800, h: 1650 },  // hal. 95
+    { src: bp021, n: 16, w: 800, h: 1650 },
+    { src: bp022, n: 23, w: 800, h: 1650 },
+    { src: bp023, n: 25, w: 800, h: 1650 },
+    { src: bp024, n: 26, w: 800, h: 1650 },
+    { src: bp025, n: 29, w: 900, h: 1650 },
+    { src: bp026, n: 32, w: 800, h: 1650 },
+    { src: bp027, n: 56, w: 800, h: 1650 },
+    { src: bp028, n: 60, w: 800, h: 1650 },
+    { src: bp029, n: 66, w: 900, h: 1650 },
+    { src: bp030, n: 68, w: 800, h: 1650 },
+    { src: bp031, n: 71, w: 900, h: 1650 },
+    { src: bp032, n: 74, w: 900, h: 1650 },
+    { src: bp033, n: 75, w: 900, h: 1650 },
+    { src: bp034, n: 95, w: 800, h: 1650 },
     ],
   },
   {
@@ -232,22 +232,22 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "CERT Participant Manual (2019)",
     credit: { en: "FEMA CERT Basic Training Participant Manual (2019) · public domain", id: "FEMA CERT Basic Training Participant Manual (2019) · domain publik" },
     pages: [
-    { src: bp035, w: 800, h: 1650 },  // hal. 25
-    { src: bp036, w: 800, h: 1650 },  // hal. 26
-    { src: bp037, w: 900, h: 1650 },  // hal. 27
-    { src: bp038, w: 900, h: 1650 },  // hal. 29
-    { src: bp039, w: 800, h: 1650 },  // hal. 32
-    { src: bp040, w: 900, h: 1650 },  // hal. 33
-    { src: bp041, w: 900, h: 1650 },  // hal. 46
-    { src: bp042, w: 900, h: 1650 },  // hal. 100
-    { src: bp043, w: 800, h: 1650 },  // hal. 128
-    { src: bp044, w: 800, h: 1650 },  // hal. 134
-    { src: bp045, w: 900, h: 1650 },  // hal. 135
-    { src: bp046, w: 800, h: 1650 },  // hal. 144
-    { src: bp047, w: 800, h: 1650 },  // hal. 175
-    { src: bp048, w: 800, h: 1650 },  // hal. 176
-    { src: bp049, w: 800, h: 1650 },  // hal. 177
-    { src: bp050, w: 800, h: 1650 },  // hal. 241
+    { src: bp035, n: 25, w: 800, h: 1650 },
+    { src: bp036, n: 26, w: 800, h: 1650 },
+    { src: bp037, n: 27, w: 900, h: 1650 },
+    { src: bp038, n: 29, w: 900, h: 1650 },
+    { src: bp039, n: 32, w: 800, h: 1650 },
+    { src: bp040, n: 33, w: 900, h: 1650 },
+    { src: bp041, n: 46, w: 900, h: 1650 },
+    { src: bp042, n: 100, w: 900, h: 1650 },
+    { src: bp043, n: 128, w: 800, h: 1650 },
+    { src: bp044, n: 134, w: 800, h: 1650 },
+    { src: bp045, n: 135, w: 900, h: 1650 },
+    { src: bp046, n: 144, w: 800, h: 1650 },
+    { src: bp047, n: 175, w: 800, h: 1650 },
+    { src: bp048, n: 176, w: 800, h: 1650 },
+    { src: bp049, n: 177, w: 800, h: 1650 },
+    { src: bp050, n: 241, w: 800, h: 1650 },
     ],
   },
   {
@@ -255,14 +255,14 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Are You Ready? (2021)",
     credit: { en: "FEMA Are You Ready? An In-Depth Guide to Citizen Preparedness (2021) · public domain", id: "FEMA Are You Ready? (2021) · domain publik" },
     pages: [
-    { src: bp051, w: 900, h: 1650 },  // hal. 9
-    { src: bp052, w: 800, h: 1650 },  // hal. 12
-    { src: bp053, w: 800, h: 1650 },  // hal. 14
-    { src: bp054, w: 800, h: 1650 },  // hal. 18
-    { src: bp055, w: 800, h: 1650 },  // hal. 19
-    { src: bp056, w: 900, h: 1650 },  // hal. 20
-    { src: bp057, w: 800, h: 1650 },  // hal. 21
-    { src: bp058, w: 800, h: 1650 },  // hal. 31
+    { src: bp051, n: 9, w: 900, h: 1650 },
+    { src: bp052, n: 12, w: 800, h: 1650 },
+    { src: bp053, n: 14, w: 800, h: 1650 },
+    { src: bp054, n: 18, w: 800, h: 1650 },
+    { src: bp055, n: 19, w: 800, h: 1650 },
+    { src: bp056, n: 20, w: 900, h: 1650 },
+    { src: bp057, n: 21, w: 800, h: 1650 },
+    { src: bp058, n: 31, w: 800, h: 1650 },
     ],
   },
   {
@@ -270,8 +270,8 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Food & Water Safety — Hurricanes & Floods (2007)",
     credit: { en: "FDA Fact Sheet — Food and Water Safety During Hurricanes, Power Outages, and Floods (2007) · public domain", id: "FDA — Keamanan Makanan & Air Saiban Badai dan Banjir (2007) · domain publik" },
     pages: [
-    { src: bp059, w: 700, h: 2100 },  // hal. 1
-    { src: bp060, w: 700, h: 2100 },  // hal. 2
+    { src: bp059, n: 1, w: 700, h: 2100 },
+    { src: bp060, n: 2, w: 700, h: 2100 },
     ],
   },
   {
@@ -279,8 +279,8 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Power Outage — FEMA sheet",
     credit: { en: "FEMA/Ready.gov Power Outage Hazard Info Sheet · public domain", id: "FEMA/Ready.gov — Lembar Info Bahaya: Listrik Padam · domain publik" },
     pages: [
-    { src: bp061, w: 900, h: 1650 },  // hal. 1
-    { src: bp062, w: 800, h: 1650 },  // hal. 2
+    { src: bp061, n: 1, w: 900, h: 1650 },
+    { src: bp062, n: 2, w: 800, h: 1650 },
     ],
   },
   {
@@ -288,12 +288,12 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Are You Ready? (2004)",
     credit: { en: "FEMA Are You Ready? IS-2 edition (2004) · public domain", id: "FEMA Are You Ready? edisi IS-2 (2004) · domain publik" },
     pages: [
-    { src: bp063, w: 900, h: 1650 },  // hal. 14
-    { src: bp064, w: 900, h: 1650 },  // hal. 15
-    { src: bp065, w: 900, h: 1650 },  // hal. 17
-    { src: bp066, w: 800, h: 1650 },  // hal. 27
-    { src: bp067, w: 800, h: 1650 },  // hal. 29
-    { src: bp068, w: 900, h: 1650 },  // hal. 30
+    { src: bp063, n: 14, w: 900, h: 1650 },
+    { src: bp064, n: 15, w: 900, h: 1650 },
+    { src: bp065, n: 17, w: 900, h: 1650 },
+    { src: bp066, n: 27, w: 800, h: 1650 },
+    { src: bp067, n: 29, w: 800, h: 1650 },
+    { src: bp068, n: 30, w: 900, h: 1650 },
     ],
   },
   {
@@ -301,13 +301,13 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "ATP 3-50.21 Survival (2018)",
     credit: { en: "US Army ATP 3-50.21 Survival (2018) · public domain", id: "US Army ATP 3-50.21 Survival (2018) · domain publik" },
     pages: [
-    { src: bp069, w: 800, h: 1650 },  // hal. 42
-    { src: bp070, w: 900, h: 1650 },  // hal. 78
-    { src: bp071, w: 800, h: 1650 },  // hal. 137
-    { src: bp072, w: 800, h: 1650 },  // hal. 138
-    { src: bp073, w: 800, h: 1650 },  // hal. 139
-    { src: bp074, w: 800, h: 1650 },  // hal. 161
-    { src: bp075, w: 800, h: 1650 },  // hal. 168
+    { src: bp069, n: 42, w: 800, h: 1650 },
+    { src: bp070, n: 78, w: 900, h: 1650 },
+    { src: bp071, n: 137, w: 800, h: 1650 },
+    { src: bp072, n: 138, w: 800, h: 1650 },
+    { src: bp073, n: 139, w: 800, h: 1650 },
+    { src: bp074, n: 161, w: 800, h: 1650 },
+    { src: bp075, n: 168, w: 800, h: 1650 },
     ],
   },
   {
@@ -315,8 +315,8 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Emergency Supply List (2024)",
     credit: { en: "Ready.gov Emergency Supply List (2024) · public domain", id: "Ready.gov — Daftar Perlengkapan Darurat (2024) · domain publik" },
     pages: [
-    { src: bp076, w: 900, h: 900 },  // hal. 1
-    { src: bp077, w: 900, h: 900 },  // hal. 2
+    { src: bp076, n: 1, w: 900, h: 900 },
+    { src: bp077, n: 2, w: 900, h: 900 },
     ],
   },
   {
@@ -324,7 +324,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Extreme Heat — FEMA sheet",
     credit: { en: "FEMA/Ready.gov Extreme Heat Hazard Info Sheet · public domain", id: "FEMA/Ready.gov — Lembar Info Bahaya: Panas Ekstrem · domain publik" },
     pages: [
-    { src: bp078, w: 800, h: 1650 },  // hal. 2
+    { src: bp078, n: 2, w: 800, h: 1650 },
     ],
   },
   {
@@ -332,7 +332,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Winter Storm — FEMA sheet",
     credit: { en: "FEMA/Ready.gov Winter Storm Hazard Info Sheet · public domain", id: "FEMA/Ready.gov — Lembar Info Bahaya: Badai Musim Dingin · domain publik" },
     pages: [
-    { src: bp079, w: 800, h: 1650 },  // hal. 2
+    { src: bp079, n: 2, w: 800, h: 1650 },
     ],
   },
   {
@@ -340,7 +340,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Heat Safety (NWS)",
     credit: { en: "National Weather Service Heat Safety brochure · public domain (NOAA)", id: "National Weather Service — Brosur Keamanan Saat Panas · domain publik (NOAA)" },
     pages: [
-    { src: bp080, w: 700, h: 1275 },  // hal. 1
+    { src: bp080, n: 1, w: 700, h: 1275 },
     ],
   },
   {
@@ -348,7 +348,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Wildfire Safety (NWS)",
     credit: { en: "National Weather Service Wildfire Safety one-pager · public domain (NOAA)", id: "National Weather Service — Keamanan Kebakaran Hutan · domain publik (NOAA)" },
     pages: [
-    { src: bp081, w: 700, h: 1650 },  // hal. 2
+    { src: bp081, n: 2, w: 700, h: 1650 },
     ],
   },
   {
@@ -356,9 +356,9 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "How to Prepare for a Hurricane",
     credit: { en: "FEMA How to Prepare for a Hurricane guide · public domain", id: "FEMA — Panduan Menghadapi Badai Tropis · domain publik" },
     pages: [
-    { src: bp082, w: 500, h: 1650 },  // hal. 7
-    { src: bp083, w: 500, h: 1650 },  // hal. 8
-    { src: bp084, w: 500, h: 1650 },  // hal. 9
+    { src: bp082, n: 7, w: 500, h: 1650 },
+    { src: bp083, n: 8, w: 500, h: 1650 },
+    { src: bp084, n: 9, w: 500, h: 1650 },
     ],
   },
   {
@@ -366,16 +366,16 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "FEMA Hazard Info Sheets (2024)",
     credit: { en: "FEMA Hazard Information Sheets, full suite (P-2143, 2024) · public domain", id: "FEMA — Lembar Informasi Bahaya lengkap (P-2143, 2024) · domain publik" },
     pages: [
-    { src: bp085, w: 800, h: 1650 },  // hal. 9
-    { src: bp086, w: 800, h: 1650 },  // hal. 13
-    { src: bp087, w: 800, h: 1650 },  // hal. 15
-    { src: bp088, w: 800, h: 1650 },  // hal. 21
-    { src: bp089, w: 900, h: 1650 },  // hal. 22
-    { src: bp090, w: 800, h: 1650 },  // hal. 25
-    { src: bp091, w: 900, h: 1650 },  // hal. 26
-    { src: bp092, w: 800, h: 1650 },  // hal. 29
-    { src: bp093, w: 900, h: 1650 },  // hal. 32
-    { src: bp094, w: 800, h: 1650 },  // hal. 33
+    { src: bp085, n: 9, w: 800, h: 1650 },
+    { src: bp086, n: 13, w: 800, h: 1650 },
+    { src: bp087, n: 15, w: 800, h: 1650 },
+    { src: bp088, n: 21, w: 800, h: 1650 },
+    { src: bp089, n: 22, w: 900, h: 1650 },
+    { src: bp090, n: 25, w: 800, h: 1650 },
+    { src: bp091, n: 26, w: 900, h: 1650 },
+    { src: bp092, n: 29, w: 800, h: 1650 },
+    { src: bp093, n: 32, w: 900, h: 1650 },
+    { src: bp094, n: 33, w: 800, h: 1650 },
     ],
   },
   {
@@ -383,7 +383,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Power Resilience Guide (2023)",
     credit: { en: "EPA Power Resilience Guide for Water and Wastewater Utilities (2023) · public domain", id: "EPA — Panduan Ketahanan Listrik untuk Utilitas Air (2023) · domain publik" },
     pages: [
-    { src: bp095, w: 800, h: 1275 },  // hal. 2
+    { src: bp095, n: 2, w: 800, h: 1275 },
     ],
   },
   {
@@ -391,9 +391,9 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Nuclear War Survival Skills (1987)",
     credit: { en: "Cresson Kearny, Nuclear War Survival Skills (1987 ed.) · may be freely distributed", id: "Cresson Kearny, Nuclear War Survival Skills (ed. 1987) · bebas didistribusikan" },
     pages: [
-    { src: bp096, w: 900, h: 1444 },  // hal. 81
-    { src: bp097, w: 900, h: 1448 },  // hal. 109
-    { src: bp098, w: 900, h: 1483 },  // hal. 110
+    { src: bp096, n: 81, w: 900, h: 1444 },
+    { src: bp097, n: 109, w: 900, h: 1448 },
+    { src: bp098, n: 110, w: 900, h: 1483 },
     ],
   },
   {
@@ -401,26 +401,26 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Where There Is No Doctor — First Aid",
     credit: { en: "Hesperian, New Where There Is No Doctor — First Aid chapters · CC BY-SA (hesperian.org)", id: "Hesperian, New Where There Is No Doctor — Bab Pertolongan Pertama · CC BY-SA (hesperian.org)" },
     pages: [
-    { src: bp099, w: 900, h: 1463 },  // hal. 1
-    { src: bp100, w: 900, h: 1463 },  // hal. 2
-    { src: bp101, w: 900, h: 1463 },  // hal. 5
-    { src: bp102, w: 900, h: 1463 },  // hal. 9
-    { src: bp103, w: 900, h: 1463 },  // hal. 12
-    { src: bp104, w: 900, h: 1463 },  // hal. 13
-    { src: bp105, w: 900, h: 1463 },  // hal. 14
-    { src: bp106, w: 900, h: 1463 },  // hal. 16
-    { src: bp107, w: 900, h: 1463 },  // hal. 19
-    { src: bp108, w: 900, h: 1463 },  // hal. 22
-    { src: bp109, w: 900, h: 1463 },  // hal. 24
-    { src: bp110, w: 900, h: 1463 },  // hal. 28
-    { src: bp111, w: 900, h: 1463 },  // hal. 29
-    { src: bp112, w: 900, h: 1463 },  // hal. 30
-    { src: bp113, w: 900, h: 1463 },  // hal. 36
-    { src: bp114, w: 900, h: 1463 },  // hal. 38
-    { src: bp115, w: 900, h: 1463 },  // hal. 51
-    { src: bp116, w: 900, h: 1463 },  // hal. 55
-    { src: bp117, w: 900, h: 1463 },  // hal. 57
-    { src: bp118, w: 900, h: 1463 },  // hal. 60
+    { src: bp099, n: 1, w: 900, h: 1463 },
+    { src: bp100, n: 2, w: 900, h: 1463 },
+    { src: bp101, n: 5, w: 900, h: 1463 },
+    { src: bp102, n: 9, w: 900, h: 1463 },
+    { src: bp103, n: 12, w: 900, h: 1463 },
+    { src: bp104, n: 13, w: 900, h: 1463 },
+    { src: bp105, n: 14, w: 900, h: 1463 },
+    { src: bp106, n: 16, w: 900, h: 1463 },
+    { src: bp107, n: 19, w: 900, h: 1463 },
+    { src: bp108, n: 22, w: 900, h: 1463 },
+    { src: bp109, n: 24, w: 900, h: 1463 },
+    { src: bp110, n: 28, w: 900, h: 1463 },
+    { src: bp111, n: 29, w: 900, h: 1463 },
+    { src: bp112, n: 30, w: 900, h: 1463 },
+    { src: bp113, n: 36, w: 900, h: 1463 },
+    { src: bp114, n: 38, w: 900, h: 1463 },
+    { src: bp115, n: 51, w: 900, h: 1463 },
+    { src: bp116, n: 55, w: 900, h: 1463 },
+    { src: bp117, n: 57, w: 900, h: 1463 },
+    { src: bp118, n: 60, w: 900, h: 1463 },
     ],
   },
   {
@@ -428,14 +428,14 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WTND — Water & Sanitation",
     credit: { en: "Hesperian, New WTND — Water and Sanitation: Keys to Staying Healthy · CC BY-SA", id: "Hesperian, New WTND — Air & Sanitasi: Kunci Tetap Sehat · CC BY-SA" },
     pages: [
-    { src: bp119, w: 900, h: 1463 },  // hal. 3
-    { src: bp120, w: 900, h: 1463 },  // hal. 4
-    { src: bp121, w: 800, h: 1463 },  // hal. 5
-    { src: bp122, w: 800, h: 1463 },  // hal. 6
-    { src: bp123, w: 800, h: 1463 },  // hal. 8
-    { src: bp124, w: 800, h: 1463 },  // hal. 23
-    { src: bp125, w: 800, h: 1463 },  // hal. 24
-    { src: bp126, w: 800, h: 1463 },  // hal. 25
+    { src: bp119, n: 3, w: 900, h: 1463 },
+    { src: bp120, n: 4, w: 900, h: 1463 },
+    { src: bp121, n: 5, w: 800, h: 1463 },
+    { src: bp122, n: 6, w: 800, h: 1463 },
+    { src: bp123, n: 8, w: 800, h: 1463 },
+    { src: bp124, n: 23, w: 800, h: 1463 },
+    { src: bp125, n: 24, w: 800, h: 1463 },
+    { src: bp126, n: 25, w: 800, h: 1463 },
     ],
   },
   {
@@ -443,10 +443,10 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WTND — Belly Pain, Diarrhea & Worms",
     credit: { en: "Hesperian, New WTND — Belly Pain, Diarrhea, and Worms · CC BY-SA", id: "Hesperian, New WTND — Sakit Perut, Diare & Cacingan · CC BY-SA" },
     pages: [
-    { src: bp127, w: 900, h: 1463 },  // hal. 20
-    { src: bp128, w: 900, h: 1463 },  // hal. 22
-    { src: bp129, w: 900, h: 1463 },  // hal. 25
-    { src: bp130, w: 900, h: 1463 },  // hal. 29
+    { src: bp127, n: 20, w: 900, h: 1463 },
+    { src: bp128, n: 22, w: 900, h: 1463 },
+    { src: bp129, n: 25, w: 900, h: 1463 },
+    { src: bp130, n: 29, w: 900, h: 1463 },
     ],
   },
   {
@@ -454,8 +454,8 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WTND — Caring for Children (dehydration)",
     credit: { en: "Hesperian, New WTND — Caring for Children chapter · CC BY-SA", id: "Hesperian, New WTND — Bab Merawat Anak (dehidrasi) · CC BY-SA" },
     pages: [
-    { src: bp131, w: 900, h: 1463 },  // hal. 7
-    { src: bp132, w: 800, h: 1463 },  // hal. 8
+    { src: bp131, n: 7, w: 900, h: 1463 },
+    { src: bp132, n: 8, w: 800, h: 1463 },
     ],
   },
   {
@@ -463,9 +463,9 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WTND — Diabetes",
     credit: { en: "Hesperian, New WTND — Diabetes chapter · CC BY-SA", id: "Hesperian, New WTND — Bab Diabetes · CC BY-SA" },
     pages: [
-    { src: bp133, w: 900, h: 1463 },  // hal. 2
-    { src: bp134, w: 900, h: 1463 },  // hal. 3
-    { src: bp135, w: 800, h: 1463 },  // hal. 31
+    { src: bp133, n: 2, w: 900, h: 1463 },
+    { src: bp134, n: 3, w: 900, h: 1463 },
+    { src: bp135, n: 31, w: 800, h: 1463 },
     ],
   },
   {
@@ -473,9 +473,9 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WTND — Heart Disease & Blood Pressure",
     credit: { en: "Hesperian, New WTND — Heart Disease and High Blood Pressure · CC BY-SA", id: "Hesperian, New WTND — Penyakit Jantung & Tekanan Darah · CC BY-SA" },
     pages: [
-    { src: bp136, w: 800, h: 1463 },  // hal. 7
-    { src: bp137, w: 800, h: 1463 },  // hal. 13
-    { src: bp138, w: 800, h: 1463 },  // hal. 20
+    { src: bp136, n: 7, w: 800, h: 1463 },
+    { src: bp137, n: 13, w: 800, h: 1463 },
+    { src: bp138, n: 20, w: 800, h: 1463 },
     ],
   },
   {
@@ -483,7 +483,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WTND — Pregnancy & Birth",
     credit: { en: "Hesperian, New WTND — Pregnancy and Birth chapter · CC BY-SA", id: "Hesperian, New WTND — Bab Kehamilan & Kelahiran · CC BY-SA" },
     pages: [
-    { src: bp139, w: 900, h: 1463 },  // hal. 19
+    { src: bp139, n: 19, w: 900, h: 1463 },
     ],
   },
   {
@@ -491,12 +491,12 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "CGEH — Protecting Community Water",
     credit: { en: "Hesperian, A Community Guide to Environmental Health ch.6 (2012) · CC BY-SA", id: "Hesperian, Community Guide to Environmental Health bab.6 (2012) · CC BY-SA" },
     pages: [
-    { src: bp140, w: 900, h: 1388 },  // hal. 12
-    { src: bp141, w: 800, h: 1388 },  // hal. 21
-    { src: bp142, w: 900, h: 1388 },  // hal. 23
-    { src: bp143, w: 800, h: 1388 },  // hal. 24
-    { src: bp144, w: 900, h: 1388 },  // hal. 29
-    { src: bp145, w: 900, h: 1388 },  // hal. 36
+    { src: bp140, n: 12, w: 900, h: 1388 },
+    { src: bp141, n: 21, w: 800, h: 1388 },
+    { src: bp142, n: 23, w: 900, h: 1388 },
+    { src: bp143, n: 24, w: 800, h: 1388 },
+    { src: bp144, n: 29, w: 900, h: 1388 },
+    { src: bp145, n: 36, w: 900, h: 1388 },
     ],
   },
   {
@@ -504,7 +504,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "CGEH — Building Toilets",
     credit: { en: "Hesperian, A Community Guide to Environmental Health ch.7 (2012) · CC BY-SA", id: "Hesperian, Community Guide to Environmental Health bab.7 (2012) · CC BY-SA" },
     pages: [
-    { src: bp146, w: 900, h: 1388 },  // hal. 12
+    { src: bp146, n: 12, w: 900, h: 1388 },
     ],
   },
   {
@@ -512,10 +512,10 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "CGEH — Sustainable Farming",
     credit: { en: "Hesperian, A Community Guide to Environmental Health ch.15 (2012) · CC BY-SA", id: "Hesperian, Community Guide to Environmental Health bab.15 (2012) · CC BY-SA" },
     pages: [
-    { src: bp147, w: 800, h: 1388 },  // hal. 20
-    { src: bp148, w: 800, h: 1388 },  // hal. 22
-    { src: bp149, w: 800, h: 1388 },  // hal. 33
-    { src: bp150, w: 800, h: 1388 },  // hal. 35
+    { src: bp147, n: 20, w: 800, h: 1388 },
+    { src: bp148, n: 22, w: 800, h: 1388 },
+    { src: bp149, n: 33, w: 800, h: 1388 },
+    { src: bp150, n: 35, w: 800, h: 1388 },
     ],
   },
   {
@@ -523,8 +523,8 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "CGEH — Solid Waste",
     credit: { en: "Hesperian, A Community Guide to Environmental Health ch.18 (2012) · CC BY-SA", id: "Hesperian, Community Guide to Environmental Health bab.18 (2012) · CC BY-SA" },
     pages: [
-    { src: bp151, w: 800, h: 1388 },  // hal. 15
-    { src: bp152, w: 900, h: 1388 },  // hal. 24
+    { src: bp151, n: 15, w: 800, h: 1388 },
+    { src: bp152, n: 24, w: 900, h: 1388 },
     ],
   },
   {
@@ -532,7 +532,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "CGEH — Unsafe Water",
     credit: { en: "Hesperian, A Community Guide to Environmental Health ch.5 (2012) · CC BY-SA", id: "Hesperian, Community Guide to Environmental Health bab.5 (2012) · CC BY-SA" },
     pages: [
-    { src: bp153, w: 900, h: 1388 },  // hal. 16
+    { src: bp153, n: 16, w: 900, h: 1388 },
     ],
   },
   {
@@ -540,7 +540,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Disabled Village Children — Pressure Sores",
     credit: { en: "Hesperian, Disabled Village Children ch.24 · CC BY-SA", id: "Hesperian, Disabled Village Children bab.24 · CC BY-SA" },
     pages: [
-    { src: bp154, w: 800, h: 1613 },  // hal. 1
+    { src: bp154, n: 1, w: 800, h: 1613 },
     ],
   },
   {
@@ -548,7 +548,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Women with Disabilities — Caregivers",
     credit: { en: "Hesperian, A Health Handbook for Women with Disabilities ch.15 (2008) · CC BY-SA", id: "Hesperian, Health Handbook for Women with Disabilities bab.15 (2008) · CC BY-SA" },
     pages: [
-    { src: bp155, w: 900, h: 1388 },  // hal. 1
+    { src: bp155, n: 1, w: 900, h: 1388 },
     ],
   },
   {
@@ -556,7 +556,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Workers' Guide — Dust",
     credit: { en: "Hesperian, A Workers' Guide to Health and Safety ch.12 (2015) · CC BY-SA", id: "Hesperian, Workers' Guide to Health and Safety bab.12 (2015) · CC BY-SA" },
     pages: [
-    { src: bp156, w: 900, h: 1388 },  // hal. 1
+    { src: bp156, n: 1, w: 900, h: 1388 },
     ],
   },
   {
@@ -564,7 +564,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Workers' Guide — Eye Protection",
     credit: { en: "Hesperian, A Workers' Guide to Health and Safety ch.18 (2015) · CC BY-SA", id: "Hesperian, Workers' Guide to Health and Safety bab.18 (2015) · CC BY-SA" },
     pages: [
-    { src: bp157, w: 800, h: 1388 },  // hal. 3
+    { src: bp157, n: 3, w: 800, h: 1388 },
     ],
   },
   {
@@ -572,8 +572,8 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Mental Health — People in Crisis",
     credit: { en: "Hesperian, Promoting Community Mental Health ch.4 (2025) · CC BY-SA", id: "Hesperian, Promoting Community Mental Health bab.4 (2025) · CC BY-SA" },
     pages: [
-    { src: bp158, w: 800, h: 1388 },  // hal. 3
-    { src: bp159, w: 800, h: 1388 },  // hal. 7
+    { src: bp158, n: 3, w: 800, h: 1388 },
+    { src: bp159, n: 7, w: 800, h: 1388 },
     ],
   },
   {
@@ -581,7 +581,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "Mental Health — Emotional Support",
     credit: { en: "Hesperian, Promoting Community Mental Health ch.2 (2025) · CC BY-SA", id: "Hesperian, Promoting Community Mental Health bab.2 (2025) · CC BY-SA" },
     pages: [
-    { src: bp160, w: 900, h: 1388 },  // hal. 8
+    { src: bp160, n: 8, w: 900, h: 1388 },
     ],
   },
   {
@@ -589,9 +589,9 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WHO TN 5 — Emergency drinking water",
     credit: { en: "WHO/WEDC Technical Notes on Drinking-Water #5 (2013)", id: "WHO/WEDC Technical Notes tentang Air Minum #5 (2013)" },
     pages: [
-    { src: bp161, w: 800, h: 1754 },  // hal. 2
-    { src: bp162, w: 800, h: 1754 },  // hal. 3
-    { src: bp163, w: 800, h: 1754 },  // hal. 4
+    { src: bp161, n: 2, w: 800, h: 1754 },
+    { src: bp162, n: 3, w: 800, h: 1754 },
+    { src: bp163, n: 4, w: 800, h: 1754 },
     ],
   },
   {
@@ -599,7 +599,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WHO TN 7 — Solid waste in emergencies",
     credit: { en: "WHO/WEDC Technical Notes on Drinking-Water #7 (2013)", id: "WHO/WEDC Technical Notes tentang Air Minum #7 (2013)" },
     pages: [
-    { src: bp164, w: 800, h: 1754 },  // hal. 1
+    { src: bp164, n: 1, w: 800, h: 1754 },
     ],
   },
   {
@@ -607,7 +607,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WHO TN 9 — How much water is needed",
     credit: { en: "WHO/WEDC Technical Notes on Drinking-Water #9 (2013)", id: "WHO/WEDC Technical Notes tentang Air Minum #9 (2013)" },
     pages: [
-    { src: bp165, w: 800, h: 1754 },  // hal. 1
+    { src: bp165, n: 1, w: 800, h: 1754 },
     ],
   },
   {
@@ -615,8 +615,8 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WHO TN 14 — Excreta disposal options",
     credit: { en: "WHO/WEDC Technical Notes on Drinking-Water #14 (2013)", id: "WHO/WEDC Technical Notes tentang Air Minum #14 (2013)" },
     pages: [
-    { src: bp166, w: 800, h: 1754 },  // hal. 2
-    { src: bp167, w: 800, h: 1754 },  // hal. 4
+    { src: bp166, n: 2, w: 800, h: 1754 },
+    { src: bp167, n: 4, w: 800, h: 1754 },
     ],
   },
   {
@@ -624,7 +624,7 @@ export const BATCH_BOOKS: BatchBook[] = [
     title: "WHO-ICRC Basic Emergency Care",
     credit: { en: "WHO-ICRC Basic Emergency Care: approach to the acutely ill and injured (2018) · CC BY-NC-SA 3.0 IGO", id: "WHO-ICRC Basic Emergency Care (2018) · CC BY-NC-SA 3.0 IGO" },
     pages: [
-    { src: bp168, w: 900, h: 1754 },  // hal. 25
+    { src: bp168, n: 25, w: 900, h: 1754 },
     ],
   },
 ];

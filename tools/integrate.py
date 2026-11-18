@@ -46,7 +46,7 @@ TYPE = """export type BatchBook = {
   id: string;
   title: string;
   credit: { en: string; id: string };
-  pages: { src: string; w: number; h: number }[];
+  pages: { src: string; n: number; w: number; h: number }[];
 };
 """
 
@@ -71,7 +71,7 @@ for bid, m in meta.items():
         v = f"bp{count:03d}"
         count += 1
         imports.append(f'import {v} from "./{rel}";')
-        refs.append(f"    {{ src: {v}, w: {w}, h: {h} }},  // hal. {n}")
+        refs.append(f"    {{ src: {v}, n: {n}, w: {w}, h: {h} }},")
     title = m.get("title", bid).replace('"', '\\"')
     cen = m.get("credit_en", "").replace('"', '\\"')
     cid = m.get("credit_id", cen).replace('"', '\\"')

@@ -217,10 +217,6 @@ reader.back:
   en: "‹ Back"
   id: "‹ Kembali"
 
-reader.page_of:
-  en: "%{n} / %{total}"
-  id: "%{n} / %{total}"
-
 reader.prev:
   en: "‹ Prev"
   id: "‹ Sebelumnya"

@@ -54,7 +54,7 @@ const mname = (m: Meta) => m.name[langPref()] ?? m.name.id;
 // Pembaca PDF: dokumen harus punya halaman yang sudah dirender di registry.
 const canRead = (item: ReadItem) => {
   const b = bookOf(item.doc);
-  return !!b && typeof item.page === "number" && item.page >= 1 && item.page <= b.pages.length;
+  return !!b && typeof item.page === "number" && b.pages.some((p) => p.n === item.page);
 };
 
 const SUGGESTIONS = ["air", "luka", "gempa", "listrik", "makanan"];
@@ -674,14 +674,15 @@ function App() {
   const Reader = () => {
     const book = (): Book => bookOf(reader()?.doc ?? "")!;
     const page = () => reader()?.page ?? 1;
-    const total = book().pages.length;
-    const pg = book().pages[page() - 1];
+    const idx = () => book().pages.findIndex((p) => p.n === page());
+    const pg = book().pages[Math.max(0, idx())];
     const w = Math.min(680, windowSize().width - 32);
     const h = Math.round((w * pg.h) / pg.w);
     const enter = createMotion({ enter: { duration: 220, easing: EASE_OUT, keyframes: { opacity: [0, 1], translateY: [12, 0] } } });
     const go = (d: number) => {
       Haptics.selection();
-      reader.update((r) => (r ? { doc: r.doc, page: Math.min(total, Math.max(1, r.page + d)) } : r));
+      const next = book().pages[idx() + d];
+      if (next) reader.update((r) => (r ? { doc: r.doc, page: next.n } : r));
     };
     return (
       <View class="flex-1 bg-background">
@@ -696,7 +697,7 @@ function App() {
           <View class="flex-1 items-center">
             <Text class="text-[15px] font-semibold text-foreground line-clamp-1">{book().title}</Text>
           </View>
-          <Text class="text-[15px] font-bold text-foreground">{ti("reader.page_of", { n: page(), total })}</Text>
+          <Text class="text-[15px] font-bold text-foreground">{ti("read.page", { n: page() })}</Text>
         </View>
         <Scroll class="flex-1 bg-muted/40">
           <View class="items-center px-4 pt-4 pb-10 gap-3" style={enter.style}>
@@ -712,7 +713,7 @@ function App() {
           <View
             role="button"
             onPress={() => go(-1)}
-            disabled={page() <= 1}
+            disabled={idx() <= 0}
             class="flex-1 h-11 rounded-(--radius) bg-card border border-border items-center justify-center transition duration-150 ease-out active:scale-[0.97] disabled:opacity-40"
           >
             <Text class="text-sm font-semibold text-foreground">{ti("reader.prev")}</Text>
@@ -720,7 +721,7 @@ function App() {
           <View
             role="button"
             onPress={() => go(1)}
-            disabled={page() >= total}
+            disabled={idx() >= book().pages.length - 1}
             class="flex-1 h-11 rounded-(--radius) bg-primary items-center justify-center transition duration-150 ease-out active:scale-[0.97] disabled:opacity-40"
           >
             <Text class="text-sm font-semibold text-primary-foreground">{ti("reader.next")}</Text>

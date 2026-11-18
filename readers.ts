@@ -3,7 +3,7 @@
 import { BOOKLET_H, BOOKLET_ID, BOOKLET_TITLE, BOOKLET_W, PAGES } from "./reader";
 import { BATCH_BOOKS } from "./readers.batch";
 
-export type BookPage = { src: string; w: number; h: number };
+export type BookPage = { src: string; n: number; w: number; h: number };
 export type Book = {
   id: string;
   title: string;
@@ -19,7 +19,7 @@ const BOOKS: Record<string, Book> = {
       en: "FEMA 477 · American Red Cross (2004) · public domain",
       id: "FEMA 477 · American Red Cross (2004) · domain publik",
     },
-    pages: PAGES.map((src) => ({ src, w: BOOKLET_W, h: BOOKLET_H })),
+    pages: PAGES.map((src, i) => ({ src, n: i + 1, w: BOOKLET_W, h: BOOKLET_H })),
   },
 };
 
