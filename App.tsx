@@ -5,7 +5,7 @@ import { Collapsible, Input } from "nsh/base";
 import { BackHandler, Haptics } from "nsh/mobile";
 import { checkForPackage, downloadPackage, runningPackage, shellInfo } from "nsh/updater";
 import { TOPICS, type Choice, type ReadItem, type Topic } from "./topics";
-import { BOOKLET_H, BOOKLET_ID, BOOKLET_TITLE, BOOKLET_W, PAGES } from "./reader";
+import { bookOf, type Book } from "./readers";
 
 // Lastbook mobile — UI v0.5: dua bahasa (nsh/i18n, locales/app.yml), pembaca PDF
 // navigasi bagian, kartu situasi yang membuka dengan pegas, ukuran teks baca,
@@ -51,9 +51,11 @@ const FALLBACK: Meta = { icon: "📖", tone: "slate", name: { id: "Topik", en: "
 const meta = (id: string): Meta => META[id] ?? FALLBACK;
 const mname = (m: Meta) => m.name[langPref()] ?? m.name.id;
 
-// Pembaca PDF: dokumen harus ini dan halamannya sudah dirender.
-const canRead = (item: ReadItem) =>
-  item.doc === BOOKLET_ID && typeof item.page === "number" && item.page >= 1 && item.page <= PAGES.length;
+// Pembaca PDF: dokumen harus punya halaman yang sudah dirender di registry.
+const canRead = (item: ReadItem) => {
+  const b = bookOf(item.doc);
+  return !!b && typeof item.page === "number" && item.page >= 1 && item.page <= b.pages.length;
+};
 
 const SUGGESTIONS = ["air", "luka", "gempa", "listrik", "makanan"];
 const PREFS_KEY = "lastbook.prefs";
@@ -112,7 +114,7 @@ function App() {
   const loaded = signal(false);
   const upd = signal<"idle" | "busy" | "ready" | "error">("idle");
   const updMsg = signal<string>("");
-  const reader = signal<number | null>(null);
+  const reader = signal<{ doc: string; page: number } | null>(null);
 
   // Preferensi di perangkat: ukuran teks & riwayat. Ditulis hanya setelah dibaca.
   Storage.getItem(PREFS_KEY)
@@ -387,7 +389,7 @@ function App() {
               accessibilityLabel={ti("read.open_page", { n: props.item.page ?? 0 })}
               onPress={() => {
                 Haptics.selection();
-                reader.set(props.item.page ?? 1);
+                reader.set({ doc: props.item.doc, page: props.item.page ?? 1 });
               }}
               class="self-start mt-1 px-2.5 py-1 rounded-(--radius-pill) bg-primary/15 border border-primary/40 transition duration-150 ease-out active:scale-[0.97]"
             >
@@ -670,14 +672,15 @@ function App() {
 
   // Pembaca PDF: satu halaman FEMA 477, navigasi sebelumnya/berikutnya.
   const Reader = () => {
-    const page = () => reader() ?? 1;
-    const total = PAGES.length;
+    const book = (): Book => bookOf(reader()?.doc ?? "")!;
+    const page = () => reader()?.page ?? 1;
+    const total = book().pages.length;
     const w = Math.min(680, windowSize().width - 32);
-    const h = Math.round((w * BOOKLET_H) / BOOKLET_W);
+    const h = Math.round((w * book().h) / book().w);
     const enter = createMotion({ enter: { duration: 220, easing: EASE_OUT, keyframes: { opacity: [0, 1], translateY: [12, 0] } } });
     const go = (d: number) => {
       Haptics.selection();
-      reader.update((p) => Math.min(total, Math.max(1, (p ?? 1) + d)));
+      reader.update((r) => (r ? { doc: r.doc, page: Math.min(total, Math.max(1, r.page + d)) } : r));
     };
     return (
       <View class="flex-1 bg-background">
@@ -690,18 +693,18 @@ function App() {
             <Text class="text-[16px] font-semibold text-primary">{ti("reader.back")}</Text>
           </View>
           <View class="flex-1 items-center">
-            <Text class="text-[15px] font-semibold text-foreground line-clamp-1">{BOOKLET_TITLE}</Text>
+            <Text class="text-[15px] font-semibold text-foreground line-clamp-1">{book().title}</Text>
           </View>
           <Text class="text-[15px] font-bold text-foreground">{ti("reader.page_of", { n: page(), total })}</Text>
         </View>
         <Scroll class="flex-1 bg-muted/40">
           <View class="items-center px-4 pt-4 pb-10 gap-3" style={enter.style}>
             <Image
-              src={PAGES[page() - 1]}
+              src={book().pages[page() - 1]}
               style={{ width: w, height: h }}
               class="rounded-(--radius-card) border border-border bg-card"
             />
-            <Text class="text-[12px] text-muted-foreground">{ti("reader.source")}</Text>
+            <Text class="text-[12px] text-muted-foreground">{book().credit[langPref()] ?? book().credit.id}</Text>
           </View>
         </Scroll>
         <View class="flex-row items-center gap-3 px-4 py-3 pb-[calc(env(safe-area-inset-bottom)+12px)] border-t border-border bg-background">

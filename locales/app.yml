@@ -217,10 +217,6 @@ reader.back:
   en: "‹ Back"
   id: "‹ Kembali"
 
-reader.source:
-  en: "FEMA 477 · American Red Cross (2004) · public domain"
-  id: "FEMA 477 · American Red Cross (2004) · domain publik"
-
 reader.page_of:
   en: "%{n} / %{total}"
   id: "%{n} / %{total}"
