@@ -3,8 +3,8 @@
   "id": "com.argakuka.lastbook",
   "appearance": "system",
   "theme": "theme.json",
-  "version": "0.3.1",
-  "build": 4,
+  "version": "0.3.2",
+  "build": 5,
   "updater": {
     "github": "madearga/lastbook-nsh",
     "publicKey": "Jg3ArqdpDEMg05kRcMiimcsiKHbucIz8fh9WLl3Ajek=",

@@ -7,7 +7,7 @@ import { TOPICS, type ReadItem, type Topic } from "./topics";
 
 const ICON: Record<string, string> = {
   comms: "📡", disaster: "🚨", energy: "🔋", food: "🍲", grow: "🌱",
-  health: "🩺", hurt: "🩹", land: "🗺️", power: "💡", preserve: "🫙",
+  health: "🩺", hurt: "🩹", land: "🗺️", power: "💡", preserve: "🥫",
   repair: "🔧", sanitation: "🧼", shelter: "🏠", water: "💧",
 };
 const ACCENT: Record<string, string> = {
