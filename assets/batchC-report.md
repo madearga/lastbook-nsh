@@ -4,7 +4,7 @@ Tanggal: 2025-11-18 · Sumber PDF: hanya kanal resmi penerbit (hesperian.org Lan
 Metode: PDF diunduh ke `assets/pdf/<id>.pdf`, hanya halaman yang dirujuk dirender `pdftoppm -png -gray -scale-to-x 900` (retry 800 jika >250KB) → `assets/<id>/p-NN.png` (NN = nomor halaman sumber). Verifikasi isi per halaman dengan `pdftotext` + kata kunci dari label/note rujukan.
 
 **Hasil akhir: 31 OK · 0 MISMATCH · 0 NOT FOUND · 6 SKIP (lisensi).**
-Halaman dirender: 69 PNG (17,7 MB). Ukuran halaman terkecil 131 KB, terbesar 583 KB; 23 halaman >250 KB setelah retry 800px (gambar/ilustrasi dominan) — sesuai instruksi retry, dibiarkan.
+Halaman dirender: 70 PNG (18,1 MB), cocok 70/70 dengan pasangan (dok, halaman) unik yang dirujuk dok OK. Ukuran halaman terkecil 131 KB, terbesar 583 KB; 24 halaman >250 KB setelah retry 800px (gambar/ilustrasi dominan) — sesuai instruksi retry, dibiarkan.
 
 ---
 
@@ -15,7 +15,7 @@ Base URL: `https://hesperian.org/wp-content/uploads/pdf/`
 | id | publikasi (edisi file) | file sumber | URL | halaman dirender | verifikasi |
 |---|---|---|---|---|---|
 | med-443ae5cfaa6ecc68 | New Where There Is No Doctor — First Aid (advance chapters, rev. 2014) | en_nwtnd_2014_03g.pdf | …/en_nwtnd_2011/en_nwtnd_2014_03g.pdf | 1,2,5,9,12,13,14,16,19,22,24,28,29,30,36,38,51,55,57,60 (20) | OK, semua kata kunci cocok |
-| med-953dfe1df69e0773 | New WTND — Water and Sanitation: Keys to Staying Healthy (rev. 2011) | en_nwtnd_2011_32b.pdf | …/en_nwtnd_2011/en_nwtnd_2011_32b.pdf | 3,4,5,6,8,23,24,25 (7 unik) | OK (p23 = 2 rujukan: boil + bleach chart) |
+| med-953dfe1df69e0773 | New WTND — Water and Sanitation: Keys to Staying Healthy (rev. 2011) | en_nwtnd_2011_32b.pdf | …/en_nwtnd_2011/en_nwtnd_2011_32b.pdf | 3,4,5,6,8,23,24,25 (8 unik) | OK (p6 fly trap; p23 = 2 rujukan: boil + bleach chart) |
 | med-8bd4770a63b99cc6 | New WTND — Belly Pain, Diarrhea, and Worms (rev. 2014) | en_nwtnd_2014_15d.pdf | …/en_nwtnd_2011/en_nwtnd_2014_15d.pdf | 20,22,25,29 | OK |
 | med-d9ac20e4a9829e89 | New WTND — Caring for Children (2011) — bagian anak dehidrasi/diare | en_nwtnd_2011_28d.pdf | …/en_nwtnd_2011/en_nwtnd_2011_28d.pdf | 7,8 | OK (bukan chapter Belly Pain: halaman 7-8 chapter Belly Pain tidak cocok label; ditemukan di chapter Caring for Children, verifikasi teks: "signs that dehydration is getting worse", "avoid anti-diarrhea medicines") |
 | med-a840a35b017c5748 | New WTND — Diabetes (rev. 2016) | en_nwtnd_2016_21a.pdf | …/en_nwtnd_2011/en_nwtnd_2016_21a.pdf | 2,3,31 | OK |
@@ -70,6 +70,6 @@ Semua 6 PDF di atas diunduh hanya untuk audit lisensi ke /tmp (di luar repo) —
 
 ## Ringkasan ukuran
 
-- 69 PNG halaman: 17,7 MB di `assets/med-*/p-NN.png`
-- 31 PDF sumber di `assets/pdf/med-*.pdf`: ±56 MB (arsip verifikasi; tidak dirujuk App.tsx/readers)
+- 70 PNG halaman: 18,1 MB di `assets/med-*/p-NN.png`
+- 31 PDF sumber di `assets/pdf/med-*.pdf`: 152 MB (arsip verifikasi; tidak dirujuk App.tsx/readers)
 - Yang tidak dicek: tidak ada render ulang cek visual per halaman (OCR/teks saja); halaman >250KB tetap 800px sesuai instruksi dan tidak dipaksa lebih kecil
