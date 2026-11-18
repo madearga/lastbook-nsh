@@ -675,8 +675,9 @@ function App() {
     const book = (): Book => bookOf(reader()?.doc ?? "")!;
     const page = () => reader()?.page ?? 1;
     const total = book().pages.length;
+    const pg = book().pages[page() - 1];
     const w = Math.min(680, windowSize().width - 32);
-    const h = Math.round((w * book().h) / book().w);
+    const h = Math.round((w * pg.h) / pg.w);
     const enter = createMotion({ enter: { duration: 220, easing: EASE_OUT, keyframes: { opacity: [0, 1], translateY: [12, 0] } } });
     const go = (d: number) => {
       Haptics.selection();
@@ -700,7 +701,7 @@ function App() {
         <Scroll class="flex-1 bg-muted/40">
           <View class="items-center px-4 pt-4 pb-10 gap-3" style={enter.style}>
             <Image
-              src={book().pages[page() - 1]}
+              src={pg.src}
               style={{ width: w, height: h }}
               class="rounded-(--radius-card) border border-border bg-card"
             />
