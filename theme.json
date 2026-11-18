@@ -3,11 +3,12 @@
   "cssVars": {
     "theme": {
       "radius": "10px",
-      "radius-card": "14px"
+      "radius-card": "14px",
+      "radius-pill": "999px"
     },
     "light": {
       "background": "#f7f5f0",
-      "foreground": "#20241f",
+      "foreground": "#1c201b",
       "card": "#ffffff",
       "card-foreground": "var(--foreground)",
       "popover": "#ffffff",
@@ -17,32 +18,51 @@
       "secondary": "#edeae2",
       "secondary-foreground": "var(--foreground)",
       "muted": "#eceade",
-      "muted-foreground": "#63665e",
+      "muted-foreground": "#585b53",
       "accent": "#e7e4d8",
       "accent-foreground": "var(--foreground)",
       "destructive": "#b3423c",
+      "destructive-foreground": "#ffffff",
       "border": "#e2ded2",
-      "input": "#d6d2c4",
-      "ring": "#9fb8a4"
+      "input": "#cfcabb",
+      "ring": "#6f9b7a",
+      "tone-blue": "#1f63b0",
+      "tone-red": "#b8362d",
+      "tone-amber": "#9a6400",
+      "tone-green": "#2b7a3b",
+      "tone-violet": "#7243bd",
+      "tone-teal": "#22707b",
+      "tone-slate": "#56626d",
+      "tone-brown": "#94461a"
     },
     "dark": {
-      "background": "#141613",
-      "foreground": "#e8e6df",
-      "card": "#1d201c",
-      "popover": "#1d201c",
+      "background": "#121411",
+      "foreground": "#ebe9e2",
+      "card": "#1c1f1b",
+      "card-foreground": "var(--foreground)",
+      "popover": "#1c1f1b",
       "popover-foreground": "var(--foreground)",
       "primary": "#8cc79b",
       "primary-foreground": "#0f2016",
       "secondary": "#242822",
       "secondary-foreground": "var(--foreground)",
       "muted": "#232721",
-      "muted-foreground": "#9aa094",
+      "muted-foreground": "#a4aa9e",
       "accent": "#2a2f28",
       "accent-foreground": "var(--foreground)",
-      "destructive": "#e07a72",
-      "border": "#2b302a",
-      "input": "#333833",
-      "ring": "#5b7f66"
+      "destructive": "#ef8a80",
+      "destructive-foreground": "#2a0d0a",
+      "border": "#2d322b",
+      "input": "#3a4039",
+      "ring": "#5b7f66",
+      "tone-blue": "#7ab6f2",
+      "tone-red": "#f2948a",
+      "tone-amber": "#e6b94f",
+      "tone-green": "#82cc92",
+      "tone-violet": "#bea2f2",
+      "tone-teal": "#6fc3cd",
+      "tone-slate": "#a9b4bf",
+      "tone-brown": "#e39a68"
     }
   }
 }
