@@ -150,3 +150,20 @@ test("reader opens FEMA 477 at the cited page and navigates", async () => {
   await app.waitFor(HAPPENING);
   expect(app.shows("Hal. 13")).toBe(false);
 });
+
+test("reader handles sparse pages by real page number", async () => {
+  const app = await openApp();
+  await app.waitFor(WATER);
+  await app.press(WATER);
+  await app.waitFor(HAPPENING);
+  await app.press("I can boil water");
+  // "Buka hal. 23" also matches a Siapkan reading from another doc: take the first (WTND).
+  await app.waitFor("Buka hal. 23 >> nth=0");
+  await app.press("Buka hal. 23 >> nth=0");
+  await app.waitFor("Hal. 23");
+  // Pages 9..22 are not rendered: previous must be 8, not 22.
+  await app.press("‹ Sebelumnya");
+  await app.waitFor("Hal. 8");
+  await app.press("‹ Kembali");
+  await app.waitFor(HAPPENING);
+});
