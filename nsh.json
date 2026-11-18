@@ -2,5 +2,16 @@
   "name": "Lastbook",
   "id": "com.argakuka.lastbook",
   "appearance": "system",
-  "theme": "theme.json"
+  "theme": "theme.json",
+  "version": "0.3.0",
+  "build": 3,
+  "updater": {
+    "github": "madearga/lastbook-nsh",
+    "publicKey": "Jg3ArqdpDEMg05kRcMiimcsiKHbucIz8fh9WLl3Ajek=",
+    "packages": {
+      "roots": [
+        "SBhyFBahGJGBaFEFGkTTGIZSlrbwkaQDmP1idQIQDmo="
+      ]
+    }
+  }
 }

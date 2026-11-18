@@ -1,4 +1,5 @@
 import { mount, signal, Scroll, Text, View } from "nsh";
+import { checkForPackage, downloadPackage, runningPackage, shellInfo } from "nsh/updater";
 import { TOPICS, type ReadItem, type Topic } from "./topics";
 
 // Lastbook mobile — UI v0.2: tema token (light/dark otomatis), class Tailwind,
@@ -52,9 +53,35 @@ function SectionTitle(props: { children: string; tone?: "plain" | "danger" }) {
   );
 }
 
+const SHELL = shellInfo();
+const PKG = runningPackage();
+
 function App() {
   const selected = signal<string | null>(null);
   const expanded = signal<string | null>(null);
+  const upd = signal<"idle" | "busy" | "ready" | "error">("idle");
+  const updMsg = signal<string>("");
+
+  async function checkUpdates() {
+    if (upd() === "busy") return;
+    try {
+      upd.set("busy");
+      updMsg.set("Memeriksa…");
+      const pkg = await checkForPackage();
+      if (!pkg) {
+        upd.set("idle");
+        updMsg.set(`Sudah terbaru (shell v${SHELL?.version ?? "—"})`);
+        return;
+      }
+      updMsg.set(`Versi ${pkg.version} tersedia. Mengunduh…`);
+      await downloadPackage();
+      upd.set("ready");
+      updMsg.set("Paket siap. Tutup paksa aplikasi, lalu buka lagi.");
+    } catch (e) {
+      upd.set("error");
+      updMsg.set(`Gagal: ${String(e)}`);
+    }
+  }
 
   const topic = (): Topic | undefined => TOPICS.find((t) => t.id === selected());
 
@@ -83,6 +110,25 @@ function App() {
               />
             )}
           </Each>
+        </View>
+
+        <View class="gap-1.5">
+          <SectionTitle>Pembaruan</SectionTitle>
+          <View class="bg-card rounded-(--radius-card) border border-border p-3.5" style={{ gap: 8 }}>
+            <Text class="text-xs text-muted-foreground">
+              Shell v{SHELL?.version ?? "—"}
+              {PKG ? ` · paket ${PKG.version} berjalan` : ""}
+            </Text>
+            <View
+              onPress={checkUpdates}
+              class="self-start rounded-(--radius) bg-primary px-3.5 py-2 transition-transform duration-150 ease-out active:scale-[0.97]"
+            >
+              <Text class="text-sm font-semibold text-primary-foreground">
+                {upd() === "busy" ? "Memeriksa…" : "Periksa pembaruan"}
+              </Text>
+            </View>
+            {updMsg() ? <Text class="text-xs text-muted-foreground">{updMsg()}</Text> : null}
+          </View>
         </View>
 
         <Text class="text-[11px] text-muted-foreground/70">
