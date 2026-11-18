@@ -1,8 +1,8 @@
 import { mount, signal, Scroll, Text, View } from "nsh";
 import { TOPICS, type ReadItem, type Topic } from "./topics";
 
-// Lastbook mobile — layar pertama: daftar topik & detail bacaan.
-// Data: content/topics/*.json asli dari Immortal-Protocols/lastbook (MIT).
+// Lastbook mobile — UI v0.2: tema token (light/dark otomatis), class Tailwind,
+// press feedback active:scale (emil-design-eng), tipografi & ritme konsisten.
 
 const ICON: Record<string, string> = {
   comms: "📡", disaster: "🚨", energy: "🔋", food: "🍲", grow: "🌱",
@@ -18,29 +18,37 @@ const ACCENT: Record<string, string> = {
 
 function ReadingRow(props: { item: ReadItem }) {
   return (
-    <View style={{ paddingVertical: 8, gap: 2 }}>
-      <Text style={{ fontSize: 15, fontWeight: "bold", color: "#1f2328" }}>{props.item.label}</Text>
-      {props.item.note ? <Text style={{ fontSize: 12, color: "#57606a" }}>{props.item.note}</Text> : null}
-      {props.item.page ? <Text style={{ fontSize: 11, color: "#8c959f" }}>📄 hal. {props.item.page}</Text> : null}
+    <View class="py-2" style={{ gap: 2 }}>
+      <Text class="text-[15px] font-semibold text-foreground">{props.item.label}</Text>
+      {props.item.note ? <Text class="text-xs text-muted-foreground">{props.item.note}</Text> : null}
+      {props.item.page ? (
+        <Text class="text-[11px] text-muted-foreground/70">📄 hal. {props.item.page}</Text>
+      ) : null}
     </View>
   );
 }
 
-function Card(props: { icon?: string; title: string; hint: string; onPress: () => void; accent: string }) {
+function Card(props: { icon?: string; title: string; hint: string; onPress: () => void; accent?: string }) {
   return (
     <View
       onPress={props.onPress}
-      style={{
-        backgroundColor: "#ffffff", borderRadius: 12, padding: 14, gap: 4,
-        borderLeftWidth: 4, borderLeftColor: props.accent,
-      }}
+      class="bg-card rounded-(--radius-card) border border-border border-l-4 p-3.5 transition-transform duration-150 ease-out active:scale-[0.97] active:bg-accent"
+      style={{ borderLeftColor: props.accent, gap: 3 }}
     >
-      <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
-        {props.icon ? <Text style={{ fontSize: 20 }}>{props.icon}</Text> : null}
-        <Text style={{ fontSize: 16, fontWeight: "bold", color: "#1f2328" }}>{props.title}</Text>
+      <View class="flex-row items-center" style={{ gap: 8 }}>
+        {props.icon ? <Text class="text-xl">{props.icon}</Text> : null}
+        <Text class="text-base font-bold text-foreground">{props.title}</Text>
       </View>
-      <Text style={{ fontSize: 12, color: "#57606a" }}>{props.hint}</Text>
+      {props.hint ? <Text class="text-xs text-muted-foreground">{props.hint}</Text> : null}
     </View>
+  );
+}
+
+function SectionTitle(props: { children: string; tone?: "plain" | "danger" }) {
+  return (
+    <Text class={props.tone === "danger" ? "text-lg font-bold text-destructive" : "text-lg font-bold text-foreground"}>
+      {props.children}
+    </Text>
   );
 }
 
@@ -51,28 +59,33 @@ function App() {
   const topic = (): Topic | undefined => TOPICS.find((t) => t.id === selected());
 
   const Home = () => (
-    <Scroll style={{ flex: 1, backgroundColor: "#f4f5f7" }}>
-      <View style={{ padding: 20, paddingTop: 56, gap: 16 }}>
-        <View style={{ gap: 4 }}>
-          <Text style={{ fontSize: 30, fontWeight: "bold", color: "#1f2328" }}>📖 Lastbook</Text>
-          <Text style={{ fontSize: 13, color: "#57606a" }}>
-            Everything you need to survive and rebuild society. Offline, private.
-          </Text>
+    <Scroll class="flex-1 bg-background">
+      <View class="p-5 gap-4" style={{ paddingTop: 56 }}>
+        <View class="flex-row items-center" style={{ gap: 12 }}>
+          <View class="w-11 h-11 rounded-(--radius-card) bg-primary items-center justify-center">
+            <Text class="text-2xl">📖</Text>
+          </View>
+          <View style={{ gap: 2 }}>
+            <Text class="text-3xl font-bold tracking-tight text-foreground">Lastbook</Text>
+            <Text class="text-xs text-muted-foreground">Survival library — offline & private</Text>
+          </View>
         </View>
-        <View style={{ gap: 10 }}>
+
+        <View class="gap-2.5">
           <Each of={TOPICS}>
             {(t) => (
               <Card
                 icon={ICON[t().id] ?? "📖"}
                 title={t().title}
                 hint={t().short ?? ""}
-                accent={ACCENT[t().id] ?? "#6e7781"}
+                accent={ACCENT[t().id]}
                 onPress={() => { expanded.set(null); selected.set(t().id); }}
               />
             )}
           </Each>
         </View>
-        <Text style={{ fontSize: 11, color: "#8c959f" }}>
+
+        <Text class="text-[11px] text-muted-foreground/70">
           Data topik asli dari lastbook (MIT). Pembacaan PDF & peta menyusul.
         </Text>
       </View>
@@ -80,33 +93,37 @@ function App() {
   );
 
   const Detail = (props: { t: Topic }) => (
-    <Scroll style={{ flex: 1, backgroundColor: "#f4f5f7" }}>
-      <View style={{ padding: 20, paddingTop: 48, gap: 14 }}>
-        <View onPress={() => { expanded.set(null); selected.set(null); }}>
-          <Text style={{ fontSize: 15, color: "#0969da" }}>‹ Semua topik</Text>
+    <Scroll class="flex-1 bg-background">
+      <View class="p-5 gap-4" style={{ paddingTop: 44 }}>
+        <View
+          onPress={() => { expanded.set(null); selected.set(null); }}
+          class="-ml-1 py-1.5 self-start transition-opacity duration-150 active:opacity-60"
+        >
+          <Text class="text-[15px] font-semibold text-primary">‹ Semua topik</Text>
         </View>
+
         <View style={{ gap: 4 }}>
-          <Text style={{ fontSize: 24, fontWeight: "bold", color: "#1f2328" }}>
-            {ICON[props.t.id] ?? "📖"}  {props.t.title}
-          </Text>
-          {props.t.intro ? <Text style={{ fontSize: 14, color: "#57606a" }}>{props.t.intro}</Text> : null}
+          <View class="flex-row items-center" style={{ gap: 8 }}>
+            <Text class="text-xl">{ICON[props.t.id] ?? "📖"}</Text>
+            <Text class="text-2xl font-bold tracking-tight text-foreground">{props.t.title}</Text>
+          </View>
+          {props.t.intro ? <Text class="text-sm text-muted-foreground">{props.t.intro}</Text> : null}
         </View>
 
         {props.t.choices ? (
-          <View style={{ gap: 8 }}>
-            <Text style={{ fontSize: 18, fontWeight: "bold", color: "#1f2328" }}>What's happening?</Text>
+          <View class="gap-2.5">
+            <SectionTitle>What's happening?</SectionTitle>
             <Each of={props.t.choices}>
               {(c) => (
-                <View style={{ gap: 8 }}>
+                <View class="gap-2.5">
                   <Card
                     title={c().label}
                     hint={c().hint ?? ""}
-                    accent={ACCENT[props.t.id] ?? "#6e7781"}
+                    accent={ACCENT[props.t.id]}
                     onPress={() => expanded.set(expanded() === c().id ? null : c().id)}
                   />
-                  {/* dibaca dalam JSX supaya reaktif */}
                   {expanded() === c().id ? (
-                    <View style={{ backgroundColor: "#ffffff", borderRadius: 12, padding: 12 }}>
+                    <View class="bg-muted rounded-(--radius) p-3">
                       <Each of={c().read}>{(r) => <ReadingRow item={r()} />}</Each>
                     </View>
                   ) : null}
@@ -117,24 +134,24 @@ function App() {
         ) : null}
 
         {props.t.limits?.length ? (
-          <View style={{ gap: 6 }}>
-            <Text style={{ fontSize: 18, fontWeight: "bold", color: "#cf222e" }}>Limits</Text>
+          <View class="gap-1.5">
+            <SectionTitle tone="danger">Limits</SectionTitle>
             <Each of={props.t.limits}>{(l) => (
-              <Text style={{ fontSize: 13, color: "#57606a" }}>• {l().text}</Text>
+              <Text class="text-[13px] text-muted-foreground">• {l().text}</Text>
             )}</Each>
           </View>
         ) : null}
 
         {props.t.prepare?.length ? (
-          <View style={{ gap: 6 }}>
-            <Text style={{ fontSize: 18, fontWeight: "bold", color: "#1f2328" }}>Prepare</Text>
+          <View class="gap-1.5">
+            <SectionTitle>Prepare</SectionTitle>
             <Each of={props.t.prepare}>{(r) => <ReadingRow item={r()} />}</Each>
           </View>
         ) : null}
 
         {props.t.learn?.length ? (
-          <View style={{ gap: 6 }}>
-            <Text style={{ fontSize: 18, fontWeight: "bold", color: "#1f2328" }}>Learn</Text>
+          <View class="gap-1.5">
+            <SectionTitle>Learn</SectionTitle>
             <Each of={props.t.learn}>{(r) => <ReadingRow item={r()} />}</Each>
           </View>
         ) : null}
@@ -143,7 +160,7 @@ function App() {
   );
 
   // Branch reaktif: signal dibaca DI DALAM ekspresi JSX, bukan di badan komponen.
-  return <View style={{ flex: 1 }}>{topic() ? <Detail t={topic()!} /> : <Home />}</View>;
+  return <View class="flex-1">{topic() ? <Detail t={topic()!} /> : <Home />}</View>;
 }
 
 mount(App);

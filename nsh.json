@@ -1,5 +1,6 @@
 {
   "name": "Lastbook",
   "id": "com.argakuka.lastbook",
-  "appearance": "system"
+  "appearance": "system",
+  "theme": "theme.json"
 }
